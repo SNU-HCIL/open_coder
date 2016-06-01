@@ -9,19 +9,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var file_open_component_1 = require('./file-open.component');
-var AppComponent = (function () {
-    function AppComponent() {
+var FileOpenComponent = (function () {
+    function FileOpenComponent() {
     }
-    AppComponent = __decorate([
+    FileOpenComponent.prototype.fileChangeEvent = function (fileInput) {
+        this.files = fileInput.target.files;
+    };
+    FileOpenComponent.prototype.open = function () {
+        console.log("Try to open ${this.files.length} files...");
+    };
+    FileOpenComponent = __decorate([
         core_1.Component({
-            selector: 'oc-app',
-            templateUrl: 'app/app.html',
-            directives: [file_open_component_1.FileOpenComponent]
+            selector: 'oc-file-open',
+            template: "\n    <div class=\"file_open\">\n      <input type=\"file\" (change)=\"fileChangeEvent($event)\" placeholder=\"Select CSV files (Multiple choice allowed)\">\n      <button *ngIf=\"files\" (click)=\"open()\">Open</button>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], FileOpenComponent);
+    return FileOpenComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.FileOpenComponent = FileOpenComponent;
+//# sourceMappingURL=file-open.component.js.map

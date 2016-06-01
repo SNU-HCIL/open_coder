@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
+import { FileOpenComponent } from './file-open.component';
+
+
 @Component({
-  selector: 'my-app',
-  template: '<h1>Open-Coder</h1>'
+  selector: 'oc-app',
+  templateUrl: 'app/app.html',
+  directives: [FileOpenComponent]
 })
 export class AppComponent { }
