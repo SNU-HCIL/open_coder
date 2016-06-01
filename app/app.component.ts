@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FileOpenComponent } from './file-open.component';
+import { Document } from './core/document';
 
 
 @Component({
@@ -7,4 +8,7 @@ import { FileOpenComponent } from './file-open.component';
   templateUrl: 'app/app.html',
   directives: [FileOpenComponent]
 })
-export class AppComponent { }
+export class AppComponent { 
+    doc : Document;
+    
+}

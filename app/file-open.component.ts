@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CsvDeserializerService } from './core/csv-deserializer.service';
 
 @Component({
   selector: 'oc-file-open',
@@ -15,18 +16,21 @@ import { Component } from '@angular/core';
       <button *ngIf="files" (click)="open()">Open</button>
       <div class="error" *ngIf="error">{{error}}</div>
     </div>
-  `
+  `,
+  providers: [CsvDeserializerService]
 })
 export class FileOpenComponent {
   files: Array<File>;
   error: string;
+  
+  constructor(private csvDeserializerService: CsvDeserializerService){}
   
   fileChangeEvent(fileInput: any){
     this.files = <Array<File>> fileInput.target.files;
   }
   
   open(){
-    console.log("Try to open ${this.files.length} files...");
+    console.log(`Try to open ${this.files.length} files...`);
     this.error = null;
     var re = /(?:\.([^.]+))?$/;
     for (var file of this.files)
@@ -38,6 +42,7 @@ export class FileOpenComponent {
       }
     }
     
+    this.csvDeserializerService.convertCsvFiles(this.files);
     
   }
 }
