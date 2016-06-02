@@ -7,7 +7,7 @@ import {QuoteEditingState} from './quote-editing-state';
   selector: 'tr.quote_element',
   styleUrls: ['app/ui/quote-editing.styles.css'],
   styles: [`
-    td{
+    td.label, td.content, td.codes{
     border-bottom: 1px solid #eaeaea;
     padding-right: 9px;
     }
@@ -22,7 +22,8 @@ import {QuoteEditingState} from './quote-editing-state';
         <ul class="code_list">
             <li *ngFor="let code of quote.codes">
                 <span class="code">
-                {{code}}
+                <span>{{code}}</span>
+                <button class="mini" (click)="onRemoveCodeClicked(code)">✖</button>
                 </span>
             </li> 
             <li>
@@ -32,7 +33,7 @@ import {QuoteEditingState} from './quote-editing-state';
                    <button (click)="onCanceled()" >Cancel</button>
                    
                 </span>
-                <button *ngIf="state == 'idle'" (click)="onAddCodeButtonClicked()">+</button>
+                <button class="round" *ngIf="state == 'idle'" (click)="onAddCodeButtonClicked()">+</button>
             </li>
         </ul>
       </td>
@@ -64,5 +65,10 @@ export class QuoteEditingComponent {
         this.quote.codes.push(this.newCodeName);
         this.quote.parent.update();
         this.state = "idle";
+    }
+    
+    onRemoveCodeClicked(code : string){
+        this.quote.codes.splice(this.quote.codes.indexOf(code), 1);
+        this.quote.parent.update();
     }
 }

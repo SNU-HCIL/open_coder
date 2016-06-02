@@ -43,7 +43,5 @@ export class Document{
         this.codeCounts.push(codeCount);
       }
     }
-    
-    console.log(this.codeCounts);
   }
 }

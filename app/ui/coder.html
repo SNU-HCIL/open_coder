@@ -1,5 +1,22 @@
-<div>
+<!--<table id="layout-wrapper">
+    <tr>
+        <td id="main">
             <table class="quote_list">
                 <tr class="quote_element" *ngFor="let quote of doc.quotes" [quote]="quote"></tr>
             </table>
+        </td>
+        <td id="sidebar">
+            <oc-code-summary [doc] = "doc"></oc-code-summary>
+        </td>
+    </tr>
+</table>-->
+<div id="layout-wrapper">
+    <div id="main">
+            <table class="quote_list">
+                <tr class="quote_element" *ngFor="let quote of doc.quotes" [quote]="quote"></tr>
+            </table>
+    </div>
+    <div id="sidebar">
+            <oc-code-summary [doc] = "doc"></oc-code-summary>
+    </div>
 </div>

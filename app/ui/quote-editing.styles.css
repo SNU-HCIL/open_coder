@@ -2,7 +2,7 @@
   font-family: sans-serif;
   font-weight: bold;
   font-size: 12px;
-  max-width: 120px;
+  min-width: 120px;
   color: #575757;
 }
   
@@ -32,7 +32,27 @@ ul.code_list li{
 
 .code{
   padding: 4px 8px;
-  border-radius: 6px;
   background: #eaeaea;
   color: #252525;
+}
+
+button.mini{
+  background: transparent;
+  border: hidden;
+  cursor: pointer;
+  margin-right: -8px;
+  color: #909090;
+}
+
+button.round{
+  background: #757575;
+  color: white;
+  border: hidden;
+  padding: 5px 9px;
+  border-radius: 19px;
+  cursor: pointer;
+}
+
+button.round:hover{
+  background: #909090;
 }
