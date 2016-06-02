@@ -1,0 +1,38 @@
+.label{
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  max-width: 120px;
+  color: #575757;
+}
+  
+.content{
+  font-size: 14px;
+  width: 400px;
+  padding-bottom: 12px;
+  padding-top: 12px;
+  line-height: 22px;
+  color: #252525;
+}
+  
+.codes{
+  font-family: sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.codes ul.code_list{
+  list-style-type: none;
+}
+
+ul.code_list li{
+  display: inline-block;
+  margin: 7px 3px;
+}
+
+.code{
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #eaeaea;
+  color: #252525;
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CsvDeserializerService } from './core/csv-deserializer.service';
 
 @Component({
@@ -23,6 +23,8 @@ export class FileOpenComponent {
   files: Array<File>;
   error: string;
   
+  @Output() documentOpened = new EventEmitter();
+  
   constructor(private csvDeserializerService: CsvDeserializerService){}
   
   fileChangeEvent(fileInput: any){
@@ -42,7 +44,13 @@ export class FileOpenComponent {
       }
     }
     
-    this.csvDeserializerService.convertCsvFiles(this.files);
+    this.csvDeserializerService.convertCsvFiles(this.files, (document)=>{
+      this.documentOpened.next(document);
+    });
     
   }
+  
+  
+  
+  
 }
