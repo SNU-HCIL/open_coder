@@ -43,5 +43,16 @@ export class Document{
         this.codeCounts.push(codeCount);
       }
     }
+    
+    this.codeCounts.sort(function(a, b){
+      if(a.count>b.count)
+      {
+        return -1;
+      }
+      else if(a.count < b.count){
+        return 1;
+      }
+      else return 0;
+    });
   }
 }
