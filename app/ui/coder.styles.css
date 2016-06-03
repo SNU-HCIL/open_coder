@@ -8,8 +8,27 @@
   position:relative;
 }
 
+#wrapper{
+  padding-left: 60px;
+}
+
+#gnb{
+  position: fixed;
+  top:0px;
+  left:0px;
+  width: 60px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#gnb #logo{
+  position:relative;
+  padding: 8px;
+}
+
 #main{
   padding-left: 25px;
+  padding-right: 12px;
   margin-right: 400px;
 }
 
@@ -21,12 +40,14 @@
     width: 400px;
     overflow-y: scroll;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#342b40+0,6f3831+100 */
+}
+
+#sidebar, #gnb{
     background: #342b40; /* Old browsers */
     background: -moz-linear-gradient(-45deg,  #342b40 0%, #6f3831 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(-45deg,  #342b40 0%,#6f3831 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(135deg,  #342b40 0%,#6f3831 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#342b40', endColorstr='#6f3831',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
 }
 
 .label_color_bullet{

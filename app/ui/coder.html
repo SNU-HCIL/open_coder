@@ -1,25 +1,24 @@
-<!--<table id="layout-wrapper">
-    <tr>
-        <td id="main">
-            <table class="quote_list">
-                <tr class="quote_element" *ngFor="let quote of doc.quotes" [quote]="quote"></tr>
-            </table>
-        </td>
-        <td id="sidebar">
-            <oc-code-summary [doc] = "doc"></oc-code-summary>
-        </td>
-    </tr>
-</table>-->
-<div id="layout-wrapper">
-    <div id="main">
-        <div *ngFor="let label of doc.labels" class="label_group_wrapper">
-           <div class="label_wrapper"><span class="label_color_bullet" [style.background]="visualizationInformationService.getCategoricalColor(doc.labels.indexOf(label))"></span>{{label}}</div>
-           <table class="quote_list" >
-               <tr class="quote_element" *ngFor="let quote of doc.quotesByLabel(label)" [quote]="quote"></tr>
-           </table>
+<div id="wrapper">
+    <div id="gnb">
+        <div id="logo">
+            <img src="app/assets/logo_white.svg">
         </div>
     </div>
-    <div id="sidebar">
-            <oc-code-summary [doc] = "doc"></oc-code-summary>
+    <div id="layout-wrapper">
+        <div id="main">
+            <oc-title title="Quote Coder"></oc-title>
+            <div>
+                <button (click)="onSaveButtonClicked()">Save</button>
+            </div>
+            <div *ngFor="let label of doc.labels" class="label_group_wrapper">
+            <div class="label_wrapper"><span class="label_color_bullet" [style.background]="visualizationInformationService.getCategoricalColor(doc.labels.indexOf(label))"></span>{{label}}</div>
+            <table class="quote_list" >
+                <tr class="quote_element" *ngFor="let quote of doc.quotesByLabel(label)" [quote]="quote"></tr>
+            </table>
+            </div>
+        </div>
+        <div id="sidebar">
+                <oc-code-summary [doc] = "doc"></oc-code-summary>
+        </div>
     </div>
 </div>

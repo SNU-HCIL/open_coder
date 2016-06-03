@@ -60,4 +60,32 @@ export class Document{
       else return 0;
     });
   }
+  
+  toCsvString(): string{
+    var maxNumCodes = 0;
+    for(var quote of this.quotes)
+    {
+      maxNumCodes = Math.max(quote.codes.length, maxNumCodes);
+    }
+    
+    var compiledJson = []
+    var fields = ["label", "quotes"]
+    for(var codeIndex = 0; codeIndex < maxNumCodes; codeIndex++)
+    {
+      fields.push(`code${codeIndex==0? "":codeIndex}`)    
+    }
+    
+    for(var quote of this.quotes)
+    {
+      let obj = [quote.label, quote.content]
+      for(var code of quote.codes)
+      {
+        obj.push(code);
+      }
+      
+      compiledJson.push(obj)
+    }
+    
+    return Papa.unparse({fields: fields, data: compiledJson}, {quotes: true, delimiter: ",", newline: "\r\n"});
+  }
 }

@@ -13,3 +13,17 @@ body {
   * See https://github.com/angular/angular.io/blob/master/public/docs/_examples/styles.css
   * for the full set of master styles used by the documentation samples
   */
+
+#wrapper{
+  padding-left: 50px;
+}
+
+#gnb{
+  position: fixed;
+  top:0px;
+  left:0px;
+  width: 50px;
+  background: red;
+  height: 100%;
+  overflow: hidden;
+}
