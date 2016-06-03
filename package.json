@@ -27,7 +27,7 @@
     "zone.js": "^0.6.12",
     "angular2-in-memory-web-api": "0.0.10",
     "bootstrap": "^3.3.6",
-    "d3-queue": "^2.0.3"
+    "fuse.js": "*"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",

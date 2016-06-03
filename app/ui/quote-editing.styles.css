@@ -1,12 +1,12 @@
-.label{
+td.label{
   font-family: sans-serif;
   font-weight: bold;
   font-size: 12px;
-  min-width: 120px;
   color: #575757;
+  max-width: 60px;
 }
   
-.content{
+td.content{
   font-size: 14px;
   width: 400px;
   padding-bottom: 12px;
@@ -15,13 +15,14 @@
   color: #252525;
 }
   
-.codes{
+td.codes{
   font-family: sans-serif;
   font-size: 11px;
   font-weight: bold;
+  max-width: 150px;
 }
 
-.codes ul.code_list{
+td.codes ul.code_list{
   list-style-type: none;
 }
 
@@ -34,6 +35,7 @@ ul.code_list li{
   padding: 4px 8px;
   background: #eaeaea;
   color: #252525;
+  white-space:nowrap;
 }
 
 button.mini{
@@ -56,3 +58,43 @@ button.round{
 button.round:hover{
   background: #909090;
 }
+
+.adding_panel{
+  position:relative;
+  width: 200px;
+}
+
+td.codes .autocomplete_list{
+  position:absolute;
+  background: #fafafa;
+  border: 1px solid #afafaf;
+  border-top: hidden;
+  -webkit-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.23);
+  -moz-box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.23);
+  box-shadow: 0px 2px 2px 1px rgba(0,0,0,0.23);
+}
+
+td.codes .autocomplete_list ul{
+  padding: 0px;
+  position: relative;
+}
+
+td.codes .autocomplete_list li{
+  cursor: pointer;
+  width: 100%;
+  margin: 0;
+}
+
+td.codes .autocomplete_list li div{
+  padding: 6px;
+}
+
+td.codes .autocomplete_list li:last-child{
+  margin-bottom: 0px;
+}
+
+td.codes .autocomplete_list li:hover{
+  background: #525252;
+  color: white;
+}
+

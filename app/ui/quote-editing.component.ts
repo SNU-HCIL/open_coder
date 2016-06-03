@@ -1,7 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {Quote} from '../core/quote';
 import {QuoteEditingState} from './quote-editing-state';
-
 
 @Component({
   selector: 'tr.quote_element',
@@ -27,12 +26,22 @@ import {QuoteEditingState} from './quote-editing-state';
                 </span>
             </li> 
             <li>
-                <span *ngIf="state == 'adding'" class="code">
-                   <input type="text" (keyup)="newCodeNameKeyUpEvent($event)">
+                <div *ngIf="state == 'adding'" class="code adding_panel">
+                   <input class="code_name_input" type="text" [(ngModel)]="newCodeName" (keyup)="newCodeNameKeyUpEvent($event)">
+                   <div *ngIf="autoCompleteList" class="autocomplete_list">
+                    <ul>
+                        <li *ngFor="let candidate of autoCompleteList" (click)="onCandidateClicked(candidate)">
+                            <div>
+                                {{candidate}}
+                            </div>
+                        </li>
+                    </ul>
+                   </div>
                    <button (click)="onApplyNewCodeButtonClicked()">Add</button>
                    <button (click)="onCanceled()" >Cancel</button>
-                   
-                </span>
+                   <br>
+                   <span *ngIf="error" class="error">{{error}}</span>
+                </div>
                 <button class="round" *ngIf="state == 'idle'" (click)="onAddCodeButtonClicked()">+</button>
             </li>
         </ul>
@@ -40,31 +49,59 @@ import {QuoteEditingState} from './quote-editing-state';
     `,
   directives: []
 })
-export class QuoteEditingComponent {
-   state: string = "idle"
+export class QuoteEditingComponent implements OnInit {
     @Input() quote: Quote
     
-    private newCodeName : string
+    state: string = "idle"
+    error: string
+    autoCompleteList : Array<string>
     
-    onAddCodeButtonClicked()
+    @Input() private newCodeName : string
+    
+    ngOnInit():any{
+        
+    }
+    
+    onAddCodeButtonClicked(): void
     {
+        this.error = null
         this.state = "adding"
     }
     
-    onCanceled(){
+    onCanceled() : void {
         this.state = "idle"
     }
     
-    newCodeNameKeyUpEvent(event : any)
+    newCodeNameKeyUpEvent(event : any) : void
     {
-        this.newCodeName = event.target.value;
+        let fuse = new Fuse(this.quote.parent.codeCounts.map((cc)=>{return cc.code}), null);
+        let fuzzyIndices = fuse.search(this.newCodeName);
+        if(fuzzyIndices != null && fuzzyIndices.length > 0)
+        {
+            this.autoCompleteList = fuzzyIndices.map((i)=>{return this.quote.parent.codeCounts[i].code});
+        }
+        else{
+            this.autoCompleteList = null
+        }
+    }
+    
+    onCandidateClicked(candidate: string){
+        this.newCodeName = candidate;
+        this.autoCompleteList = null;
     }
     
     onApplyNewCodeButtonClicked()
     {
-        this.quote.codes.push(this.newCodeName);
-        this.quote.parent.update();
-        this.state = "idle";
+        if(this.quote.codes.indexOf(this.newCodeName) < 0)
+        {
+            this.quote.codes.push(this.newCodeName);
+            this.quote.parent.update();
+            this.state = "idle";
+            this.error = null
+        }
+        else{
+            this.error = "Duplicate code.";
+        }
     }
     
     onRemoveCodeClicked(code : string){
