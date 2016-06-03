@@ -1,6 +1,7 @@
 .quote_list{
   font-family: 'KoPub Batang', serif;
   width: 100%;
+  margin-bottom: 60px;
 }
 
 #layout-wrapper{
@@ -27,3 +28,15 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#342b40', endColorstr='#6f3831',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 
 }
+
+.label_color_bullet{
+  padding-left: 20px;
+  margin-right: 4px;
+}
+
+.label_wrapper{
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: bold;
+}
+

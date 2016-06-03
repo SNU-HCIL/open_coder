@@ -12,9 +12,12 @@
 </table>-->
 <div id="layout-wrapper">
     <div id="main">
-            <table class="quote_list">
-                <tr class="quote_element" *ngFor="let quote of doc.quotes" [quote]="quote"></tr>
-            </table>
+        <div *ngFor="let label of doc.labels" class="label_group_wrapper">
+           <div class="label_wrapper"><span class="label_color_bullet" [style.background]="visualizationInformationService.getCategoricalColor(doc.labels.indexOf(label))"></span>{{label}}</div>
+           <table class="quote_list" >
+               <tr class="quote_element" *ngFor="let quote of doc.quotesByLabel(label)" [quote]="quote"></tr>
+           </table>
+        </div>
     </div>
     <div id="sidebar">
             <oc-code-summary [doc] = "doc"></oc-code-summary>

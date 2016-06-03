@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {Quote} from '../core/quote';
 import {QuoteEditingState} from './quote-editing-state';
+import {VisualizationInformationService} from './visualization-information.service';
 
 @Component({
   selector: 'tr.quote_element',
@@ -13,10 +14,7 @@ import {QuoteEditingState} from './quote-editing-state';
     `],
   template: 
     `
-      <td class="label">
-        {{quote.label}}
-      </td>
-      <td class="content">{{quote.content}}</td>
+      <td class="content" [style.border-left-color]="visualizationInformationService.getCategoricalColor(quote.parent.labels.indexOf(quote.label))">{{quote.content}}</td>
       <td class="codes">
         <ul class="code_list">
             <li *ngFor="let code of quote.codes">
@@ -57,6 +55,11 @@ export class QuoteEditingComponent implements OnInit {
     autoCompleteList : Array<string>
     
     @Input() private newCodeName : string
+    
+    constructor(private visualizationInformationService: VisualizationInformationService)
+    {
+        
+    }
     
     ngOnInit():any{
         

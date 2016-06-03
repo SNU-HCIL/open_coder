@@ -11,6 +11,11 @@ export class Document{
     this.codeCounts = [];
   }
   
+  quotesByLabel(label: string) : Quote[]
+  {
+    return this.quotes.filter((q)=>{return q.label === label;})
+  }
+  
   update(){
     
     //apply parent

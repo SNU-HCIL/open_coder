@@ -1,10 +1,10 @@
-td.label{
+/*td.label{
   font-family: sans-serif;
   font-weight: bold;
   font-size: 12px;
   color: #575757;
   max-width: 60px;
-}
+}*/
   
 td.content{
   font-size: 14px;
@@ -13,6 +13,9 @@ td.content{
   padding-top: 12px;
   line-height: 22px;
   color: #252525;
+  width: 60%;
+  padding-left: 12px;
+  border-left: 4px solid #252525;
 }
   
 td.codes{
