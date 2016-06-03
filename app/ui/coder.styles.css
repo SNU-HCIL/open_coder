@@ -19,35 +19,35 @@
   width: 60px;
   height: 100%;
   overflow: hidden;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#342b40+0,6f3831+100 */
+  background: #342b40; /* Old browsers */
+  background: -moz-linear-gradient(-45deg,  #342b40 0%, #6f3831 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg,  #342b40 0%,#6f3831 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg,  #342b40 0%,#6f3831 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#342b40', endColorstr='#6f3831',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 #gnb #logo{
   position:relative;
-  padding: 8px;
+  padding: 9px 12px 0px 9px;
 }
 
 #main{
   padding-left: 25px;
   padding-right: 12px;
-  margin-right: 400px;
+  margin-right: 408px;
 }
 
 #sidebar{
-    position: fixed;
-    top: 0px;
-    right: 0px;
-    height: 100%;
-    width: 400px;
-    overflow-y: scroll;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#342b40+0,6f3831+100 */
-}
-
-#sidebar, #gnb{
-    background: #342b40; /* Old browsers */
-    background: -moz-linear-gradient(-45deg,  #342b40 0%, #6f3831 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg,  #342b40 0%,#6f3831 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg,  #342b40 0%,#6f3831 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#342b40', endColorstr='#6f3831',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 376px;
+  overflow-y: scroll;
+  border-left: 8px solid #e2dcdb;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .label_color_bullet{
@@ -61,3 +61,8 @@
   font-weight: bold;
 }
 
+.separator{
+  margin: 10px 6px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18)
+}
