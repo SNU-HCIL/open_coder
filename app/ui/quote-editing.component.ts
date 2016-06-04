@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {Quote} from '../core/quote';
+import {Entry} from '../core/document';
+
 import {QuoteEditingState} from './quote-editing-state';
 import {VisualizationInformationService} from './visualization-information.service';
 
@@ -17,9 +19,9 @@ import {VisualizationInformationService} from './visualization-information.servi
       <td class="content" [style.border-left-color]="visualizationInformationService.getCategoricalColor(quote.parent.labels.indexOf(quote.label))">{{quote.content}}</td>
       <td class="codes">
         <ul class="code_list">
-            <li *ngFor="let code of quote.codes">
+            <li *ngFor="let code of quote.codes" class="code_block">
                 <span class="code">
-                <span>{{code}}</span>
+                <span>{{code.content}}</span>
                 <button class="mini" (click)="onRemoveCodeClicked(code)">✖</button>
                 </span>
             </li> 
@@ -77,11 +79,11 @@ export class QuoteEditingComponent implements OnInit {
     
     newCodeNameKeyUpEvent(event : any) : void
     {
-        let fuse = new Fuse(this.quote.parent.codeCounts.map((cc)=>{return cc.code}), null);
+        let fuse = new Fuse(this.quote.parent.codeCounts.map((cc)=>{return cc.code.content}), null);
         let fuzzyIndices = fuse.search(this.newCodeName);
         if(fuzzyIndices != null && fuzzyIndices.length > 0)
         {
-            this.autoCompleteList = fuzzyIndices.map((i)=>{return this.quote.parent.codeCounts[i].code});
+            this.autoCompleteList = fuzzyIndices.map((i)=>{return this.quote.parent.codeCounts[i].code.content});
         }
         else{
             this.autoCompleteList = null
@@ -95,9 +97,9 @@ export class QuoteEditingComponent implements OnInit {
     
     onApplyNewCodeButtonClicked()
     {
-        if(this.quote.codes.indexOf(this.newCodeName) < 0)
+        if(this.quote.codes.map((c)=>{return c.content}).indexOf(this.newCodeName) < 0)
         {
-            this.quote.codes.push(this.newCodeName);
+            this.quote.codes.push(new Entry(this.newCodeName));
             this.quote.parent.update();
             this.state = "idle";
             this.error = null
@@ -107,7 +109,7 @@ export class QuoteEditingComponent implements OnInit {
         }
     }
     
-    onRemoveCodeClicked(code : string){
+    onRemoveCodeClicked(code : Entry){
         this.quote.codes.splice(this.quote.codes.indexOf(code), 1);
         this.quote.parent.update();
     }

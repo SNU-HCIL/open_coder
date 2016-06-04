@@ -35,7 +35,10 @@
 #main{
   padding-left: 25px;
   padding-right: 12px;
-  margin-right: 408px;
+  margin-right: 368px;
+  height: 100%;
+  overflow-y:scroll;
+  overflow-x: hidden;
 }
 
 #sidebar{
@@ -43,7 +46,7 @@
   top: 0px;
   right: 0px;
   height: 100%;
-  width: 376px;
+  width: 336px;
   overflow-y: scroll;
   border-left: 8px solid #e2dcdb;
   padding-left: 12px;

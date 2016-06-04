@@ -1,6 +1,16 @@
 <oc-title title="Codes"></oc-title>
-<ul>
+<!--<ul>
     <li *ngFor="let codeCount of doc.codeCounts">
         {{codeCount.code}} : {{codeCount.count}}
     </li>
-</ul>
+</ul>-->
+<table class="summary_table">
+    <tr *ngFor="let codeCount of doc.codeCounts">
+        <th>
+            {{codeCount.code.content}}
+        </th>
+        <td>
+            {{codeCount.count}}
+        </td>
+    </tr>
+</table>

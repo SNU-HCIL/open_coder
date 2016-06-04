@@ -1,10 +1,9 @@
-import { Document } from "./document";
+import { Document, Entry } from "./document";
 
-export class Quote{
+export class Quote extends Entry{
     parent : Document
     label: string
-    content: string
-    codes: string[] = []
+    codes: Entry[] = []
     
     static fromJson(json?:any) : Quote {
         if(json != null)
@@ -25,7 +24,7 @@ export class Quote{
                 {
                     let code = json[propertyName];
                     if(code != null && code != "")
-                    result.codes.push(code);
+                    result.codes.push({content:code});
                 }
             }
             

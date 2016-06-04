@@ -29,7 +29,7 @@ td.codes ul.code_list{
   list-style-type: none;
 }
 
-ul.code_list li{
+ul.code_list li.code_block{
   display: inline-block;
   margin: 7px 3px;
 }
@@ -80,6 +80,7 @@ td.codes .autocomplete_list{
 td.codes .autocomplete_list ul{
   padding: 0px;
   position: relative;
+  list-style-type: none;
 }
 
 td.codes .autocomplete_list li{

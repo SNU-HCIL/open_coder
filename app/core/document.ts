@@ -1,10 +1,22 @@
 import { Quote } from './quote';
+import { Memo } from './memo';
+
+export class Entry{
+  content: string;
+  timestamp: Date;
+  constructor(content?: string){
+    this.content = content
+    this.timestamp = new Date()
+  }
+}
 
 export class Document{
   name: string;
   quotes: Quote[]
   labels: string[]
-  codeCounts: Array<{code:string, count:number}>
+  codeCounts: Array<{code:Entry, count:number}>
+  
+  memos : Memo[]
     
   constructor(){
     this.quotes = [];
@@ -30,7 +42,7 @@ export class Document{
       },[]);
     
     this.codeCounts = []
-    let codes = []
+    let codes = new Array<Entry>()
     for(var codeArr of this.quotes.map((quote)=>{return quote.codes}))
     {
       codes = codes.concat(codeArr);
@@ -38,7 +50,7 @@ export class Document{
     
     for(var code of codes)
     {
-      var codeCount = this.codeCounts.find((v)=>{return v.code === code})
+      var codeCount = this.codeCounts.find((v)=>{return v.code.content === code.content})
       if(codeCount!= null)
       {
         codeCount.count++;
@@ -80,7 +92,7 @@ export class Document{
       let obj = [quote.label, quote.content]
       for(var code of quote.codes)
       {
-        obj.push(code);
+        obj.push(code.content);
       }
       
       compiledJson.push(obj)
