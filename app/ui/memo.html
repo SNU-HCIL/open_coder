@@ -1,11 +1,9 @@
 <div class="memo">
-    <div class="title">
-        {{memo.title | nullAlternative: "No Title"}}
-    </div>
+    <oc-click-to-edit class="title" [(content)]="memo.title" altText="No Title">
+    </oc-click-to-edit>
     <div class="timestamp">
         {{memo.timestamp | date: "yyyy MM dd, hh:mm:ss"}}
     </div>
-    <div class="content">
-        {{memo.content | nullAlternative: "Click to Edit"}}
-    </div>
+     <oc-click-to-edit class="content" [(content)]="memo.content" altText="Click to Edit">
+    </oc-click-to-edit>
 </div>

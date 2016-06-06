@@ -1,5 +1,5 @@
-import { Component, Input, ElementRef } from '@angular/core';
-import {NullAlternativePipe} from './common/null-alternative.pipe';
+import { Component, Input, OnInit, ElementRef } from '@angular/core';
+import {ClickToEditComponent} from './common/click-to-edit.component';
 import {VisualizationInformationService} from './visualization-information.service';
 import { Memo } from '../core/memo';
 
@@ -7,14 +7,17 @@ import { Memo } from '../core/memo';
   selector: 'oc-memo',
   styleUrls:['app/ui/memo.css'],
   templateUrl: 'app/ui/memo.html',
-  directives: [],
-  pipes: [NullAlternativePipe]
+  directives: [ClickToEditComponent]
 })
-export class MemoComponent {
+export class MemoComponent implements OnInit {
     @Input() memo : Memo;
     
     constructor(private elmRef: ElementRef, private visualizationInformationService: VisualizationInformationService){
       
     }
     
+    ngOnInit(){
+       var jquery = jQuery(this.elmRef.nativeElement);
+       
+    }
 }
