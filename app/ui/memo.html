@@ -1,9 +1,9 @@
 <div class="memo">
-    <oc-click-to-edit class="title" [(content)]="memo.title" altText="No Title">
+    <oc-click-to-edit class="title" [target]="memo" propertyName="title" altText="No Title">
     </oc-click-to-edit>
     <div class="timestamp">
         {{memo.timestamp | date: "yyyy MM dd, hh:mm:ss"}}
     </div>
-     <oc-click-to-edit class="content" [(content)]="memo.content" altText="Click to Edit">
+     <oc-click-to-edit class="content" [target]="memo" propertyName="content" altText="Click to Edit">
     </oc-click-to-edit>
 </div>

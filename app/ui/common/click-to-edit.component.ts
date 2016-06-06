@@ -15,11 +15,11 @@ import {NullAlternativePipe} from './null-alternative.pipe';
   `],
   template: `
     <div class="click_to_edit">
-        <div *ngIf="!isEditMode" (click)="onClicked()">{{content | nullAlternative: altText}}</div>
+        <div *ngIf="!isEditMode" (click)="onClicked()">{{target[propertyName] | nullAlternative: altText}}</div>
         <table class="input_box" *ngIf="singleLine && isEditMode">
             <tr>
                 <td class="input_cell">
-                    <input type="text" [(ngModel)]="currentEditedText">    
+                    <input type="text" [(ngModel)]="currentEditedText" (keypress)="keyPressed($event.keyCode)">    
                 </td>
                 <td>
                     <button class="button.mini" (click)="onApplyClicked()">Apply</button>
@@ -31,11 +31,12 @@ import {NullAlternativePipe} from './null-alternative.pipe';
         </table>
     </div>
     `,
-  properties: ['singleLine', 'altText'],
+  properties: ['propertyName', 'singleLine', 'altText'],
   pipes: [NullAlternativePipe]
 })
 export class ClickToEditComponent {
-    @Input() content: string;
+    @Input() target;
+    propertyName = "content";
     
     @Output() editApplied = new EventEmitter();
     
@@ -54,21 +55,27 @@ export class ClickToEditComponent {
             console.log("start editmode")
             
             this.isEditMode = true;
-            this.currentEditedText = this.content;
+            this.currentEditedText = this.target[this.propertyName];
         }
     }
     
     private onApplyClicked(){
-        console.log("apply")
-        console.log(this.currentEditedText);
-        this.content = this.currentEditedText
+        this.target[this.propertyName] = this.currentEditedText
         this.editApplied.next(this.currentEditedText);
         this.isEditMode = false;
     }
     
     private onCancelClicked(){
-        console.log("jaja")
         this.isEditMode = false;
+    }
+    
+    private keyPressed(keyCode: number)
+    {
+        console.log(keyCode);
+        if(keyCode == 13)
+        {
+            this.onCancelClicked();
+        }
     }
     
 }
