@@ -1,8 +1,6 @@
 import { Entry } from './document';
 
-export class Memo{
-    content: string
+export class Memo extends Entry{
     title: string
-    timestamp: Date
     contexts: Entry[]
 }

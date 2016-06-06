@@ -1,9 +1,18 @@
-<div id="wrapper">
-    <div id="gnb">
-        <div id="logo">
-            <img src="app/assets/logo_white.svg">
+<div id="wrapper" [ngClass]="{expanded: isLnbExpanded}">
+    <div id="lnb" [ngClass]="{expanded: isLnbExpanded}">
+        <div *ngIf="!isLnbExpanded">
+            <div id="logo">
+                <img src="app/assets/logo_white.svg">
+            </div>
+            <div class="separator dark"></div>
         </div>
-        <div class="separator dark"></div>
+        
+        <div id="expanded_lnb_content_wrapper" *ngIf="isLnbExpanded">
+            <oc-memo-list [doc]="doc"></oc-memo-list>
+        </div>
+        
+        <div id="lnb_expander" (click)="toggleLnb()">
+        </div>
         
     </div>
     <div id="layout-wrapper">

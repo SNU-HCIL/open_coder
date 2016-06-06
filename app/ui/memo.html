@@ -1,0 +1,11 @@
+<div class="memo">
+    <div class="title">
+        {{memo.title | nullAlternative: "No Title"}}
+    </div>
+    <div class="timestamp">
+        {{memo.timestamp | date: "yyyy MM dd, hh:mm:ss"}}
+    </div>
+    <div class="content">
+        {{memo.content | nullAlternative: "Click to Edit"}}
+    </div>
+</div>

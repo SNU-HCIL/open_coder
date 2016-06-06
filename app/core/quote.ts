@@ -24,7 +24,7 @@ export class Quote extends Entry{
                 {
                     let code = json[propertyName];
                     if(code != null && code != "")
-                    result.codes.push({content:code});
+                    result.codes.push(new Entry(code));
                 }
             }
             

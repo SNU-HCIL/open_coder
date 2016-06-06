@@ -12,14 +12,20 @@ import { Component, Input } from '@angular/core';
         padding-bottom: 12px;
         margin-top: 11px;
     }
+    
+    .title.white{
+      color: #fafafa;
+      border-bottom-color: rgba(255,255,255,0.2);
+    }
   `],
   template: `
-    <div class="title">
+    <div class="title" [ngClass]="{white:white}">
         {{title}}
     </div>
     `,
-  properties: ['title']
+  properties: ['title', 'white']
 })
 export class TitleComponent {
     title : string;
+    white : boolean;
 }

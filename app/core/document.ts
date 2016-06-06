@@ -21,6 +21,7 @@ export class Document{
   constructor(){
     this.quotes = [];
     this.codeCounts = [];
+    this.memos = [];
   }
   
   quotesByLabel(label: string) : Quote[]
