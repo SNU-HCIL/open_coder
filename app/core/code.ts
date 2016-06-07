@@ -1,4 +1,4 @@
-import { Entry } from './document';
+import { Entry } from './entry';
 
 export class Code extends Entry{
 }

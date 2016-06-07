@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import {TitleComponent} from './common/title.component';
 import {MemoComponent} from './memo.component';
 import {NullAlternativePipe} from './common/null-alternative.pipe';
-import { Document } from '../core/document';
+import { OcDocument } from '../core/oc-document';
 import { Memo } from '../core/memo';
 
 @Component({
@@ -12,7 +12,7 @@ import { Memo } from '../core/memo';
   directives: [TitleComponent, MemoComponent]
 })
 export class MemoListComponent {
-    @Input() doc : Document;
+    @Input() doc : OcDocument;
     
     
     addNewMemo(){

@@ -1,4 +1,4 @@
-import { Document } from './document';
+import { OcDocument } from './oc-document';
 import { Quote } from './quote';
 
 export class CsvDeserializerUnit{

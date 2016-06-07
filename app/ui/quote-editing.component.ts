@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {Quote} from '../core/quote';
-import {Entry} from '../core/document';
+import {Entry} from '../core/entry';
 
 import {QuoteEditingState} from './quote-editing-state';
 import {VisualizationInformationService} from './visualization-information.service';

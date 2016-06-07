@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Document } from './document';
+import { OcDocument } from './oc-document';
 import { Quote } from './quote';
 import { CsvDeserializerUnit } from './csv-deserializer-unit';
 
 @Injectable()
 export class CsvDeserializerService{
     convertCsvFiles(files: Array<File>, callback: (document)=>void){
-        var document: Document = new Document();
+        var document: OcDocument = new OcDocument();
         
         let unit = new CsvDeserializerUnit(files);
         unit.loadAsync((data:Array<any>)=>{

@@ -1,10 +1,12 @@
-import { Document, Entry } from "./document";
+import { OcDocument } from "./oc-document";
+import { Entry } from './entry';
 import { Code } from './code';
 
 export class Quote extends Entry{
-    parent : Document
+    parent : OcDocument
     label: string
     codes: Code[] = []
+    
     
     static fromJson(json?:any) : Quote {
         if(json != null)
@@ -39,5 +41,12 @@ export class Quote extends Entry{
         result["label"] = this.label;
         result["codes"] = this.codes.map((c)=>{return c.toJson()});
         return result;
+    }
+    
+    fromJson(json: any){
+        super.fromJson(json);
+        this.label = json.label;
+        this.codes = json.codes.map((cj)=>{ return new Code().fromJson(cj)});
+        return this;
     }
 }

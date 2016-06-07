@@ -4,7 +4,7 @@ import { CodeSummaryComponent} from './code-summary.component';
 import { MemoListComponent } from './memo-list.component';
 import {TitleComponent} from './common/title.component';
 import {VisualizationInformationService} from './visualization-information.service';
-import { Document } from '../core/document';
+import { OcDocument } from '../core/oc-document';
 
 @Component({
   selector: 'oc-coder',
@@ -14,7 +14,7 @@ import { Document } from '../core/document';
   providers: [VisualizationInformationService]
 })
 export class CoderComponent {
-    @Input() doc : Document;
+    @Input() doc : OcDocument;
     
     isLnbExpanded :boolean = false;
     
@@ -23,7 +23,13 @@ export class CoderComponent {
     }
     
     onSaveButtonClicked(){
-      console.log(this.doc.toSerializedJson());
+      let json = this.doc.toSerializedJson()
+      console.log(json);
+      let jsonString = JSON.stringify(json);
+      var blob = new Blob([jsonString], {type:'application/json'});
+      var url = URL.createObjectURL(blob);
+      saveAs(blob, "opencoder-document.json");
+      
     }
     
     expandLnb(){

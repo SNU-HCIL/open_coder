@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FileOpenComponent } from './file-open.component';
 import { CoderComponent } from './ui/coder.component';
-import { Document } from './core/document';
+import { OcDocument } from './core/oc-document';
 
 
 @Component({
@@ -10,9 +10,9 @@ import { Document } from './core/document';
   directives: [FileOpenComponent, CoderComponent]
 })
 export class AppComponent { 
-    doc : Document;
+    doc : OcDocument;
     
-    onDocumentOpened(document: Document){
+    onDocumentOpened(document: OcDocument){
       this.doc = document;
       console.log(document);
     }

@@ -1,22 +1,9 @@
+import { Entry } from './entry';
 import { Quote } from './quote';
 import { Memo } from './memo';
 import { Code } from './code';
 
-export class Entry{
-  content: string;
-  timestamp: Date;
-  constructor(content?: string){
-    this.content = content
-    this.timestamp = new Date()
-  }
-  
-  toJson(document?:Document):Object
-  {
-    return {content: this.content, timestamp: this.timestamp.getTime()};
-  }
-}
-
-export class Document{
+export class OcDocument{
   name: string;
   quotes: Quote[]
   labels: string[]
@@ -55,7 +42,7 @@ export class Document{
       },[]);
     
     this.codeCounts = []
-    let codes = new Array<Entry>()
+    let codes = new Array<Code>()
     for(var codeArr of this.quotes.map((quote)=>{return quote.codes}))
     {
       codes = codes.concat(codeArr);
@@ -117,4 +104,27 @@ export class Document{
   toSerializedJson(){
     return {name: this.name, memos: this.memos.map((m)=>{return m.toJson(this)}), quotes: this.quotes.map((q)=>{return q.toJson()})}
   }
+  
+  static fromJson(json: any){
+    let result = new OcDocument();
+    result.name = json.name;
+    if(json.quotes != null)
+    {
+      result.quotes = json.quotes.map((qj)=>{
+        let q = new Quote().fromJson(qj);
+        q.parent = result;
+        return q;
+      });
+    }
+    
+    if(json.memos != null)
+    {
+      result.memos = json.memos.map((mj)=>{
+        return new Memo().fromJson(mj);
+      });
+    }
+    
+    result.quotes
+  }
+  
 }

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import {TitleComponent} from './common/title.component';
-import { Document } from '../core/document';
+import { OcDocument } from '../core/oc-document';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { Document } from '../core/document';
   directives: [TitleComponent]
 })
 export class CodeSummaryComponent {
-    @Input() doc : Document;
+    @Input() doc : OcDocument;
     
     onHover(code: string){
       console.log(this.doc.quotesByCode(code));
