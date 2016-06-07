@@ -5,6 +5,7 @@
                 <img src="app/assets/logo_white.svg">
             </div>
             <div class="separator dark"></div>
+            <button (click)="onSaveButtonClicked()">Save</button>
         </div>
         
         <div id="expanded_lnb_content_wrapper" *ngIf="isLnbExpanded">
@@ -12,8 +13,7 @@
         </div>
         
         <div id="lnb_expander" (click)="toggleLnb()">
-        </div>
-        
+        </div>        
     </div>
     <div id="layout-wrapper">
         <div id="main">

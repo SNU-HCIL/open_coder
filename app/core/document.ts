@@ -3,7 +3,6 @@ import { Memo } from './memo';
 import { Code } from './code';
 
 export class Entry{
-  private uuid: string;
   content: string;
   timestamp: Date;
   constructor(content?: string){
@@ -11,13 +10,9 @@ export class Entry{
     this.timestamp = new Date()
   }
   
-  id(){
-    return this.uuid;
-  }
-  
-  toJson():Object
+  toJson(document?:Document):Object
   {
-    return {id: this.uuid, content: this.content, timestamp: this.timestamp.getTime()};
+    return {content: this.content, timestamp: this.timestamp.getTime()};
   }
 }
 
@@ -25,7 +20,7 @@ export class Document{
   name: string;
   quotes: Quote[]
   labels: string[]
-  codeCounts: Array<{code:Code, count:number}>
+  codeCounts: Array<{code:string, count:number}>
   
   memos : Memo[]
     
@@ -39,6 +34,12 @@ export class Document{
   {
     return this.quotes.filter((q)=>{return q.label === label;})
   }
+  
+  quotesByCode(code: string) : Quote[]
+  {
+    return this.quotes.filter((q)=>{return q.codes.filter((c)=>{return c.content == code}).length > 0; });
+  }
+  
   
   update(){
     
@@ -62,13 +63,13 @@ export class Document{
     
     for(var code of codes)
     {
-      var codeCount = this.codeCounts.find((v)=>{return v.code.content === code.content})
+      var codeCount = this.codeCounts.find((v)=>{return v.code === code.content})
       if(codeCount!= null)
       {
         codeCount.count++;
       }
       else{
-        codeCount = {code: code, count: 1}
+        codeCount = {code: code.content, count: 1}
         this.codeCounts.push(codeCount);
       }
     }
@@ -111,5 +112,9 @@ export class Document{
     }
     
     return Papa.unparse({fields: fields, data: compiledJson}, {quotes: true, delimiter: ",", newline: "\r\n"});
+  }
+  
+  toSerializedJson(){
+    return {name: this.name, memos: this.memos.map((m)=>{return m.toJson(this)}), quotes: this.quotes.map((q)=>{return q.toJson()})}
   }
 }

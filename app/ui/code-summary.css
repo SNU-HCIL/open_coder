@@ -16,14 +16,23 @@ table.summary_table{
     font-weight: bold;
     color: #252525;
     margin-bottom: 25px;
+    border-collapse: collapse;
 }
 
 table.summary_table th{
     text-align: left;
-    padding:8px 2px;
+    padding:8px 6px;
 }
 
 table.summary_table th,  
 table.summary_table td{
     border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+
+table.summary_table td{
+    padding: 0px 3px;
+}
+
+table.summary_table tr:hover{
+    background: #dde9ea;
 }

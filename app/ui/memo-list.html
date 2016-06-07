@@ -2,6 +2,6 @@
 <div class="add_new_memo" (click)="addNewMemo()">+Add New Memo</div>
 <ul class="memo-list">
     <li *ngFor="let memo of doc.memos">
-        <oc-memo [memo]="memo"></oc-memo>
+        <oc-memo [memo]="memo" (onRemove)="removeMemo($event)"></oc-memo>
     </li>
 </ul>

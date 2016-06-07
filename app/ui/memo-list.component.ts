@@ -19,4 +19,9 @@ export class MemoListComponent {
         this.doc.memos.push(new Memo());
     }
     
+    removeMemo(memo: Memo)
+    {
+        this.doc.memos.splice(this.doc.memos.indexOf(memo), 1)
+    }
+    
 }

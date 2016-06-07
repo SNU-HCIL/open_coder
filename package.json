@@ -28,7 +28,8 @@
     "angular2-in-memory-web-api": "0.0.10",
     "bootstrap": "^3.3.6",
     "fuse.js": "*",
-    "jquery": "*"
+    "jquery": "*",
+    "node-uuid": "*"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",

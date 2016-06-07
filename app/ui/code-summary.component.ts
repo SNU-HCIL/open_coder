@@ -12,4 +12,7 @@ import { Document } from '../core/document';
 export class CodeSummaryComponent {
     @Input() doc : Document;
     
+    onHover(code: string){
+      console.log(this.doc.quotesByCode(code));
+    }
 }

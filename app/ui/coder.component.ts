@@ -23,7 +23,7 @@ export class CoderComponent {
     }
     
     onSaveButtonClicked(){
-      console.log(this.doc.toCsvString());
+      console.log(this.doc.toSerializedJson());
     }
     
     expandLnb(){

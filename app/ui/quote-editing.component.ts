@@ -79,11 +79,11 @@ export class QuoteEditingComponent implements OnInit {
     
     newCodeNameKeyUpEvent(event : any) : void
     {
-        let fuse = new Fuse(this.quote.parent.codeCounts.map((cc)=>{return cc.code.content}), null);
+        let fuse = new Fuse(this.quote.parent.codeCounts.map((cc)=>{return cc.code}), null);
         let fuzzyIndices = fuse.search(this.newCodeName);
         if(fuzzyIndices != null && fuzzyIndices.length > 0)
         {
-            this.autoCompleteList = fuzzyIndices.map((i)=>{return this.quote.parent.codeCounts[i].code.content});
+            this.autoCompleteList = fuzzyIndices.map((i)=>{return this.quote.parent.codeCounts[i].code});
         }
         else{
             this.autoCompleteList = null

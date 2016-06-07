@@ -41,27 +41,6 @@ ul.code_list li.code_block{
   white-space:nowrap;
 }
 
-button.mini{
-  background: transparent;
-  border: hidden;
-  cursor: pointer;
-  margin-right: -8px;
-  color: #909090;
-}
-
-button.round{
-  background: #757575;
-  color: white;
-  border: hidden;
-  padding: 5px 9px;
-  border-radius: 19px;
-  cursor: pointer;
-}
-
-button.round:hover{
-  background: #909090;
-}
-
 .adding_panel{
   position:relative;
   width: 200px;

@@ -1,6 +1,20 @@
 .memo{
     background: rgba(255, 255, 255, 0.86);
     padding: 9px;
+    position: relative;
+}
+
+.memo button.close{
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 0px;
+    right: 0px;
+    margin-right: 0px;
+}
+
+.memo .header{
+    margin-right:24px;
 }
 
 .title{
@@ -17,7 +31,7 @@
 .content{
     padding-top: 9px;
     font-size: 12px;
-    line-height:22px;
+    line-height:18px;
 }
 
 .content .input_box{

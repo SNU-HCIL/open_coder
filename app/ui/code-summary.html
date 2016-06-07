@@ -5,9 +5,9 @@
     </li>
 </ul>-->
 <table class="summary_table">
-    <tr *ngFor="let codeCount of doc.codeCounts">
+    <tr *ngFor="let codeCount of doc.codeCounts" (mouseover)="onHover(codeCount.code)">
         <th>
-            {{codeCount.code.content}}
+            {{codeCount.code}}
         </th>
         <td>
             {{codeCount.count}}
