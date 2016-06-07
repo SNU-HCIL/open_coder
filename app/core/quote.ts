@@ -33,4 +33,10 @@ export class Quote extends Entry{
         }
         else return null;
     }
+    
+    toJson(){
+        let result = super.toJson();
+        result["label"] = this.label;
+        result["codes"] = this.codes.map((c)=>{return c.id()});
+    }
 }

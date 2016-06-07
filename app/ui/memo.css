@@ -15,7 +15,11 @@
 }
 
 .content{
+    padding-top: 9px;
     font-size: 12px;
     line-height:22px;
-    padding-top: 9px;
+}
+
+.content .input_box{
+    font-size:11px;
 }

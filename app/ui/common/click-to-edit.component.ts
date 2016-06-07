@@ -1,6 +1,8 @@
 import { Component, Input, Output, EventEmitter, ElementRef, AfterViewChecked } from '@angular/core';
 import {NullAlternativePipe} from './null-alternative.pipe';
 
+import {IStyleContainer} from './style-container.interface';
+
 @Component({
   selector: 'oc-click-to-edit',
   styles: [`
@@ -8,49 +10,64 @@ import {NullAlternativePipe} from './null-alternative.pipe';
         position:relative;
         cursor: pointer;
     }
-  
-    table.input_box{
+    
+    .input{
         width: 100%;
+    }
+  
+    input.input{
+    }
+    
+    textarea.input{
+        width: 100%;
+        min-height: 150px;
+    }
+    
+    .button_container{
+        margin-top: 5px;
+        text-align: right;
     }
   `],
   template: `
-    <div class="click_to_edit">
-        <div *ngIf="!isEditMode" (click)="onClicked()">{{target[propertyName] | nullAlternative: altText}}</div>
-        <table class="input_box" *ngIf="singleLine && isEditMode">
-            <tr>
-                <td class="input_cell">
-                    <input class="input" type="text" [(ngModel)]="currentEditedText" (keypress)="keyPressed($event.keyCode)">    
-                </td>
-                <td>
-                    <button class="button.mini" (click)="onApplyClicked()">Apply</button>
-                </td>
-                <td>
-                    <button class="button.mini" (click)="onCancelClicked()">Cancel</button>
-                </td>
-            </tr>
-        </table>
+    <div class="click_to_edit" [style.margin]="componentMarginStyle">
+        <div class="text" *ngIf="!isEditMode" (click)="onClicked()">{{target[propertyName] | nullAlternative: altText}}</div>
+        <div class="input_box" *ngIf="isEditMode">
+            <input class="input" *ngIf="singleLine==true" type="text" [(ngModel)]="currentEditedText" (keypress)="keyPressed($event.keyCode)">  
+            <textarea class="input" *ngIf="singleLine==false" [(ngModel)]="currentEditedText" (keypress)="keyPressed($event.keyCode)"></textarea>
+            
+            <div class="button_container">
+                <button class="button.mini" (click)="onApplyClicked()">Apply</button>
+                <button class="button.mini" (click)="onCancelClicked()">Cancel</button>
+            </div>
+        </div>
     </div>
     `,
-  properties: ['propertyName', 'singleLine', 'altText'],
+  properties: ['propertyName', 'singleLine', 'altText', 'overrideInputStyle', 'overrideTextStyle'],
   pipes: [NullAlternativePipe],
 })
 export class ClickToEditComponent implements AfterViewChecked {
     @Input() target;
+    
+    style_string = "color: red; background: blue; font-size: 50px;";
+    
+    //properties
     propertyName = "content";
+    singleLine : boolean = true;
+    altText : string = "No content";
+    @Input() componentMarginStyle: string = "";
+    componentPaddingStyle: string = ""; 
+    
     
     @Output() editApplied = new EventEmitter();
-    
-    singleLine : boolean = true;
-    
-    altText : string = "No content";
-    
+        
     isEditMode :boolean = false;
     
     private focusInputInThisCycle = false;
     
     @Input() private currentEditedText : string;
     
-    constructor(private elementRef: ElementRef){}
+    constructor(private elementRef: ElementRef){
+    }
     
     private onClicked(){
         if(this.isEditMode == false)
@@ -83,7 +100,6 @@ export class ClickToEditComponent implements AfterViewChecked {
     
     private keyPressed(keyCode: number)
     {
-        console.log(keyCode);
         if(keyCode == 13)
         {
             this.onApplyClicked();
@@ -93,7 +109,7 @@ export class ClickToEditComponent implements AfterViewChecked {
     ngAfterViewChecked(){
         if(this.focusInputInThisCycle)
         {
-            jQuery(this.elementRef.nativeElement).find("input").focus();
+            jQuery(this.elementRef.nativeElement).find(".input").focus();
             this.focusInputInThisCycle = false;
         }
     }

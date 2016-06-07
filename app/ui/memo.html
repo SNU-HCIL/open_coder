@@ -4,6 +4,6 @@
     <div class="timestamp">
         {{memo.timestamp | date: "yyyy MM dd, hh:mm:ss"}}
     </div>
-     <oc-click-to-edit class="content" [target]="memo" propertyName="content" altText="Click to Edit">
+     <oc-click-to-edit class="content" [target]="memo" propertyName="content" altText="Click to Edit" [singleLine]=false componentMarginStyle="9px 0px 0px 0px">
     </oc-click-to-edit>
 </div>

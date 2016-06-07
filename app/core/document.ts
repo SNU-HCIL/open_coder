@@ -3,11 +3,21 @@ import { Memo } from './memo';
 import { Code } from './code';
 
 export class Entry{
+  private uuid: string;
   content: string;
   timestamp: Date;
   constructor(content?: string){
     this.content = content
     this.timestamp = new Date()
+  }
+  
+  id(){
+    return this.uuid;
+  }
+  
+  toJson():Object
+  {
+    return {id: this.uuid, content: this.content, timestamp: this.timestamp.getTime()};
   }
 }
 
