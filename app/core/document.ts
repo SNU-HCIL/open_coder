@@ -1,5 +1,6 @@
 import { Quote } from './quote';
 import { Memo } from './memo';
+import { Code } from './code';
 
 export class Entry{
   content: string;
@@ -14,7 +15,7 @@ export class Document{
   name: string;
   quotes: Quote[]
   labels: string[]
-  codeCounts: Array<{code:Entry, count:number}>
+  codeCounts: Array<{code:Code, count:number}>
   
   memos : Memo[]
     

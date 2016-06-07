@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, AfterViewChecked } from '@angular/core';
 import {NullAlternativePipe} from './null-alternative.pipe';
 
 @Component({
@@ -19,7 +19,7 @@ import {NullAlternativePipe} from './null-alternative.pipe';
         <table class="input_box" *ngIf="singleLine && isEditMode">
             <tr>
                 <td class="input_cell">
-                    <input type="text" [(ngModel)]="currentEditedText" (keypress)="keyPressed($event.keyCode)">    
+                    <input class="input" type="text" [(ngModel)]="currentEditedText" (keypress)="keyPressed($event.keyCode)">    
                 </td>
                 <td>
                     <button class="button.mini" (click)="onApplyClicked()">Apply</button>
@@ -32,9 +32,9 @@ import {NullAlternativePipe} from './null-alternative.pipe';
     </div>
     `,
   properties: ['propertyName', 'singleLine', 'altText'],
-  pipes: [NullAlternativePipe]
+  pipes: [NullAlternativePipe],
 })
-export class ClickToEditComponent {
+export class ClickToEditComponent implements AfterViewChecked {
     @Input() target;
     propertyName = "content";
     
@@ -46,16 +46,28 @@ export class ClickToEditComponent {
     
     isEditMode :boolean = false;
     
+    private focusInputInThisCycle = false;
+    
     @Input() private currentEditedText : string;
+    
+    constructor(private elementRef: ElementRef){}
     
     private onClicked(){
         if(this.isEditMode == false)
         {
-            
-            console.log("start editmode")
-            
-            this.isEditMode = true;
+            this.setEditMode(true);
+        }
+    }
+    
+    private setEditMode(mode: boolean){
+        this.isEditMode = mode;
+        if(mode == true)
+        {
             this.currentEditedText = this.target[this.propertyName];
+            this.focusInputInThisCycle = true;
+        }
+        else{
+            
         }
     }
     
@@ -66,7 +78,7 @@ export class ClickToEditComponent {
     }
     
     private onCancelClicked(){
-        this.isEditMode = false;
+        this.setEditMode(false);
     }
     
     private keyPressed(keyCode: number)
@@ -74,7 +86,15 @@ export class ClickToEditComponent {
         console.log(keyCode);
         if(keyCode == 13)
         {
-            this.onCancelClicked();
+            this.onApplyClicked();
+        }
+    }
+    
+    ngAfterViewChecked(){
+        if(this.focusInputInThisCycle)
+        {
+            jQuery(this.elementRef.nativeElement).find("input").focus();
+            this.focusInputInThisCycle = false;
         }
     }
     
