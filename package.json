@@ -29,7 +29,8 @@
     "bootstrap": "^3.3.6",
     "fuse.js": "*",
     "jquery": "*",
-    "node-uuid": "*"
+    "node-uuid": "*",
+    "quill":"*"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",

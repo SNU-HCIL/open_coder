@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, ElementRef, AfterViewChecked } from '@angular/core';
 import {NullAlternativePipe} from './null-alternative.pipe';
+import {NewLinePipe} from './new-line.pipe';
 
 import {IStyleContainer} from './style-container.interface';
 
@@ -30,11 +31,11 @@ import {IStyleContainer} from './style-container.interface';
   `],
   template: `
     <div class="click_to_edit" [style.margin]="componentMarginStyle">
-        <div class="text" *ngIf="!isEditMode" (click)="onClicked()">{{target[propertyName] | nullAlternative: altText}}</div>
+        <div class="text" *ngIf="!isEditMode" (click)="onClicked()" [innerHTML]="target[propertyName] | newline | nullAlternative: altText"></div>
         <div class="input_box" *ngIf="isEditMode">
             <input class="input" *ngIf="singleLine==true" type="text" [(ngModel)]="currentEditedText" (keypress)="keyPressed($event.keyCode)">  
-            <textarea class="input" *ngIf="singleLine==false" [(ngModel)]="currentEditedText" (keypress)="keyPressed($event.keyCode)"></textarea>
-            
+            <div class="multiline" *ngIf="singleLine==false"></div>
+
             <div class="button_container">
                 <button class="button.mini" (click)="onApplyClicked()">Apply</button>
                 <button class="button.mini" (click)="onCancelClicked()">Cancel</button>
@@ -43,7 +44,7 @@ import {IStyleContainer} from './style-container.interface';
     </div>
     `,
   properties: ['propertyName', 'singleLine', 'altText', 'overrideInputStyle', 'overrideTextStyle'],
-  pipes: [NullAlternativePipe],
+  pipes: [NullAlternativePipe, NewLinePipe],
 })
 export class ClickToEditComponent implements AfterViewChecked {
     @Input() target;
@@ -56,7 +57,8 @@ export class ClickToEditComponent implements AfterViewChecked {
     altText : string = "No content";
     @Input() componentMarginStyle: string = "";
     componentPaddingStyle: string = ""; 
-    
+
+    private quill;    
     
     @Output() editApplied = new EventEmitter();
         
@@ -80,7 +82,12 @@ export class ClickToEditComponent implements AfterViewChecked {
         this.isEditMode = mode;
         if(mode == true)
         {
-            this.currentEditedText = this.target[this.propertyName];
+            if(this.singleLine==false)
+            {
+            }
+            else
+                this.currentEditedText = this.target[this.propertyName];
+
             this.focusInputInThisCycle = true;
         }
         else{
@@ -89,6 +96,11 @@ export class ClickToEditComponent implements AfterViewChecked {
     }
     
     private onApplyClicked(){
+        if(this.singleLine==false)
+        {
+            this.currentEditedText = this.quill.getText();
+        }
+
         this.target[this.propertyName] = this.currentEditedText
         this.editApplied.next(this.currentEditedText);
         this.isEditMode = false;
@@ -109,7 +121,25 @@ export class ClickToEditComponent implements AfterViewChecked {
     ngAfterViewChecked(){
         if(this.focusInputInThisCycle)
         {
-            jQuery(this.elementRef.nativeElement).find(".input").focus();
+            if(this.singleLine == true)
+                jQuery(this.elementRef.nativeElement).find(".input").focus();
+            else
+            {
+                this.quill = new Quill(".multiline", {theme: "snow", styles: {
+                    '.ql-editor':{
+                        'min-height': "initial"
+                    },
+                    '.ql-container':{
+                        'height':'initial'
+                    }
+                }});
+
+                var text = this.target[this.propertyName];
+                this.quill.setText(text == null? "" : text);
+
+                this.quill.focus();
+            }
+
             this.focusInputInThisCycle = false;
         }
     }
