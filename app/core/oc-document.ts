@@ -124,7 +124,9 @@ export class OcDocument{
       });
     }
     
-    result.quotes
+    result.update();
+    
+    return result;
   }
   
 }

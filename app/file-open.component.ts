@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { CsvDeserializerService } from './core/csv-deserializer.service';
+import {OcDocument} from './core/oc-document';
 
 @Component({
   selector: 'oc-file-open',
@@ -12,41 +12,48 @@ import { CsvDeserializerService } from './core/csv-deserializer.service';
     }`],
   template: `
     <div class="file_open">
-      <input type="file" name="file[]" multiple (change)="fileChangeEvent($event)" placeholder="Select CSV files (Multiple choice allowed)">
-      <button *ngIf="files" (click)="open()">Open</button>
+      <input type="file" name="file" (change)="fileChangeEvent($event)" placeholder="Select Json file">
+      <button *ngIf="file" (click)="open()">Open</button>
       <div class="error" *ngIf="error">{{error}}</div>
     </div>
-  `,
-  providers: [CsvDeserializerService]
+  `
 })
 export class FileOpenComponent {
-  files: Array<File>;
+  file: File;
   error: string;
   
   @Output() documentOpened = new EventEmitter();
   
-  constructor(private csvDeserializerService: CsvDeserializerService){}
-  
   fileChangeEvent(fileInput: any){
-    this.files = <Array<File>> fileInput.target.files;
+    if(fileInput.target.files.length>0)
+    {
+      this.file = fileInput.target.files[0];
+    }
+    else{
+      this.file = null;
+    }
   }
   
   open(){
-    console.log(`Try to open ${this.files.length} files...`);
+    console.log(`Try to open document...`);
     this.error = null;
     var re = /(?:\.([^.]+))?$/;
-    for (var file of this.files)
+    if(re.exec(this.file.name)[1] != "json")
     {
-      if(re.exec(file.name)[1] != "csv")
-      {
         this.error = "Wrong file format. Select CSV file only.";
         return;
-      }
     }
     
-    this.csvDeserializerService.convertCsvFiles(this.files, (document)=>{
-      this.documentOpened.next(document);
-    });
+    var jsonString : string = null;
+    
+    var reader = new FileReader();
+    reader.onload = (e)=>{
+      console.log(e);
+      jsonString = reader.result;
+      console.log(JSON.parse(jsonString));
+      this.documentOpened.next(OcDocument.fromJson(JSON.parse(jsonString)));
+    };
+    reader.readAsText(this.file);
     
   }
   
