@@ -42,7 +42,7 @@ import {VisualizationInformationService} from './visualization-information.servi
                    <br>
                    <span *ngIf="error" class="error">{{error}}</span>
                 </div>
-                <button class="round" *ngIf="state == 'idle'" (click)="onAddCodeButtonClicked()">+</button>
+                <button class="circle" *ngIf="state == 'idle'" (click)="onAddCodeButtonClicked()">+</button>
             </li>
         </ul>
       </td>

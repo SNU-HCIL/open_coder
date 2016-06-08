@@ -130,7 +130,9 @@ export class ClickToEditComponent implements AfterViewChecked {
                         'min-height': "initial"
                     },
                     '.ql-container':{
-                        'height':'initial'
+                        'height':'initial',
+                        "padding": "0px",
+                        'background': "rgba(0,0,0,0.05)"
                     }
                 }});
 

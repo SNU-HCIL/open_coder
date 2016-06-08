@@ -47,6 +47,9 @@ body {
 
 /*common styles*/
 
+button{
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+}
 
 button.mini{
   background: transparent;
@@ -54,9 +57,12 @@ button.mini{
   cursor: pointer;
   margin-right: -8px;
   color: #909090;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 }
 
 button.round{
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-weight: 400;
   background: #757575;
   color: white;
   border: hidden;
@@ -66,5 +72,27 @@ button.round{
 }
 
 button.round:hover{
+  background: #909090;
+}
+
+button.round, button.circle{
+  background: #757575;
+  color: white;
+  border: hidden;
+  padding: 5px 9px;
+  border-radius: 19px;
+  cursor: pointer;
+}
+
+
+button.circle{
+  padding: initial;
+  width: 20px;
+  height: 20px;
+  border-radius: 19px;
+  cursor: pointer;
+}
+
+button.round:hover, button.circle:hover{
   background: #909090;
 }
