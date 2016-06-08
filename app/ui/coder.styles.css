@@ -19,6 +19,12 @@
 
 
 #lnb{
+  /*flex*/
+  display:flex;
+  flex-direction: column;
+  -ms-flex-direction: column;
+  /**/
+  
   position: fixed;
   top:0px;
   left:0px;
@@ -43,6 +49,10 @@
   padding: 9px 12px 0px 9px;
 }
 
+#lnb img{
+  width: 100%;
+}
+
 #lnb_expander{
   position: absolute;
   width: 14px;
@@ -61,6 +71,10 @@
   padding-left: 12px;
   padding-right: 12px;
   
+  /*flex*/
+  display:flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 #main{
@@ -99,4 +113,9 @@
   margin: 10px 6px;
   height: 1px;
   background: rgba(255, 255, 255, 0.18)
+}
+
+oc-memo-list{
+  display:flex;
+  flex-direction: column;
 }
