@@ -1,7 +1,7 @@
 <h1>Projects</h1>
 <div>
-    <ul id="project_list">
-        <li *ngFor="let project of projects" (click)="openProject()">
+    <div id="project_list">
+        <div *ngFor="let project of projects" (click)="openProject()">
             <div class="project_list_element buttonized"> 
                 <div class="project_name" >{{project.name}}</div>
                 <div *ngIf="project.description" class="project_description">{{project.description}}</div>
@@ -10,8 +10,8 @@
                     <div *ngIf="project.documents" class="num_documents">{{project.documents.length}} Documents</div>
                 </div>
             </div>
-        </li>
-        <li *ngIf="addMode==false" (click)="toAddMode()">
+        </div>
+        <div *ngIf="addMode==false" (click)="toAddMode()">
             <div class="project_list_element buttonized">
                 <div class="add_new_project_button">
                     <div class="plus">+</div>
@@ -20,8 +20,8 @@
                     </div>
                 </div>
             </div>
-        </li>
-        <li *ngIf="addMode==true">
+        </div>
+        <div *ngIf="addMode==true">
             <div class="project_list_element add_form">
                 <h4>New Project</h4>
                 <div class="input_group">
@@ -35,6 +35,7 @@
                 </div>
                 <button class="button_normal" (click)="createNewProject()">Create</button>
             </div>
-        </li>
-    </ul>
+        </div>
+        <div style="clear:both"></div>
+    </div>
 </div>

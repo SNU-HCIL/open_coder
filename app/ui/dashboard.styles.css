@@ -1,5 +1,6 @@
-ul#project_list li{
-    display:inline-block;
+#project_list > div{
+    display:block;
+    float:left;
     overflow:hidden;
 }
 
