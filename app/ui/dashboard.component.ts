@@ -1,12 +1,14 @@
-import { Component, Input, Output, OnInit, ElementRef, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, AfterViewInit, ElementRef, EventEmitter } from '@angular/core';
 import { PluralizePipe } from './common/pluralize.pipe';
 import { AuthService } from '../services/auth.service';
+import { StyleInjector, GRADIENT_BACKGROUND_STYLE } from './common/style_injector';
+import {TitleComponent} from './common/title.component';
 
 @Component({
   selector: 'oc-dashboard',
   styleUrls:['app/ui/dashboard.styles.css'],
   templateUrl: 'app/ui/dashboard.html',
-  directives: [],
+  directives: [TitleComponent],
   pipes:[PluralizePipe]
 })
 export class DashboardComponent implements OnInit {
@@ -14,6 +16,8 @@ export class DashboardComponent implements OnInit {
     private projects : Array<any>;
 
     private addMode : boolean = false;
+    
+    private bgColorInjector:StyleInjector = new StyleInjector("body", GRADIENT_BACKGROUND_STYLE);
 
     newProjectName : string;
     newProjectDescription : string;
@@ -26,6 +30,8 @@ export class DashboardComponent implements OnInit {
         this.authService.getProjects().then(res=>{
             this.projects = res;
         })
+        
+        this.bgColorInjector.apply();
     }
 
     toAddMode(){
@@ -50,5 +56,7 @@ export class DashboardComponent implements OnInit {
                 }
             })
     }
+    
+    
     
 }

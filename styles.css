@@ -108,3 +108,7 @@ button.round:hover, button.circle:hover{
   background: linear-gradient(135deg,  #342b40 0%,#6f3831 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#342b40', endColorstr='#6f3831',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
+
+#main_content_wrapper{
+  padding:0px 20px 45px 20px;
+}
