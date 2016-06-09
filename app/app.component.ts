@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FileOpenComponent } from './file-open.component';
+import { RouteConfig, RouterOutlet } from '@angular/router-deprecated';
+import { LoginRouterOutlet } from './login.router-outlet';
+
+import { LoginComponent} from './ui/login.component';
+import { DashboardComponent } from './ui/dashboard.component';
 import { CoderComponent } from './ui/coder.component';
 import { OcDocument } from './core/oc-document';
 import { AuthService} from './services/auth.service';
@@ -7,9 +11,17 @@ import { AuthService} from './services/auth.service';
 @Component({
   selector: 'oc-app',
   templateUrl: 'app/app.html',
-  directives: [FileOpenComponent, CoderComponent],
+  directives: [LoginRouterOutlet],
   
 })
+
+@RouteConfig([
+  {path: '/', redirectTo: ['Dashboard']},
+  {path: '/dashboard', component: DashboardComponent, name:"Dashboard", useAsDefault: true},
+  {path: '/login', component: LoginComponent, name:"Login"},
+  {path: '/coder', component:CoderComponent, name:"Coder"}
+])
+
 export class AppComponent implements OnInit { 
     doc : OcDocument;
     

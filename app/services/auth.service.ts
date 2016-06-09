@@ -1,13 +1,13 @@
 //https://medium.com/@blacksonic86/authentication-in-angular-2-958052c64492#.obqxr6aiv
 
 import {Injectable} from '@angular/core';
-import {Http, Headers, RequestOptions } from '@angular/http';
+import {Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 const HOST = "http://localhost:3001";
 const PATH_SIGN_IN = HOST + '/auth/sign_in';
 const PATH_SIGN_OUT = HOST + '/auth/sign_out';
-const PATH_RETURN = HOST + '/validate_token';
+const PATH_RETURN = HOST + '/auth/validate_token';
 
 const PARAM_CLIENT = "client"
 const PARAM_TOKEN = "access-token"
@@ -24,6 +24,10 @@ export class AuthService{
   constructor(private http:Http)
   {
     this.loggedIn = !!localStorage.getItem('auth_token');
+  }
+
+  public isLoggedIn(): boolean{
+    return this.loggedIn;
   }
   
   private getAuthInfo(): Object{
@@ -55,6 +59,7 @@ export class AuthService{
       .toPromise()
       .catch(error=>{ console.log(error); return false;})
       .then(response=>{
+        console.log("devise login success")
         localStorage.setItem(PARAM_CLIENT, response.headers.get(PARAM_CLIENT))
         localStorage.setItem(PARAM_UID, response.headers.get(PARAM_UID))
         localStorage.setItem(PARAM_TOKEN, response.headers.get(PARAM_TOKEN))
@@ -76,8 +81,29 @@ export class AuthService{
   }
   
   validate_token() : Promise<boolean>{
-    //resutn this.http.post()
-    return null;
+
+    let header = new Headers({"Content-Type": 'application/json'})
+    let authInfo = this.getAuthInfo();
+
+    let options = new RequestOptions({ headers: header, search: new URLSearchParams() });
+    
+    for(var key in authInfo)
+    {
+      options.search.set(key, authInfo[key]);
+    }
+
+    return this.http.get(PATH_RETURN, options)
+      .toPromise()
+      .then(response=>{
+        console.log(response);
+        return true;
+      })
+      .catch(error=>{
+        console.log(error);
+        return false;
+      })
   }
+
+  
   
 }

@@ -30,7 +30,8 @@
     "fuse.js": "*",
     "jquery": "*",
     "node-uuid": "*",
-    "quill":"*"
+    "quill":"*",
+    "intl":"*"
   },
   "devDependencies": {
     "concurrently": "^2.0.0",
