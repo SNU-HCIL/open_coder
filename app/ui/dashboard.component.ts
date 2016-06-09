@@ -1,11 +1,13 @@
 import { Component, Input, Output, OnInit, ElementRef, EventEmitter } from '@angular/core';
+import { PluralizePipe } from './common/pluralize.pipe';
 import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'oc-dashboard',
   styleUrls:['app/ui/dashboard.styles.css'],
   templateUrl: 'app/ui/dashboard.html',
-  directives: []
+  directives: [],
+  pipes:[PluralizePipe]
 })
 export class DashboardComponent implements OnInit {
     

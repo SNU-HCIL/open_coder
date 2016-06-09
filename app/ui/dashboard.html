@@ -7,7 +7,7 @@
                 <div *ngIf="project.description" class="project_description">{{project.description}}</div>
                 <div class="separator"></div>
                 <div class="details">
-                    <div *ngIf="project.documents" class="num_documents">{{project.documents.length}} Documents</div>
+                    <div *ngIf="project.documents" class="num_documents">{{project.documents.length | pluralize:"Document"}}</div>
                 </div>
             </div>
         </div>
