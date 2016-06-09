@@ -26,7 +26,7 @@ export class LoginRouterOutlet extends RouterOutlet{
         if(this.publicRoutes.indexOf(url)<0 && !this.authService.isLoggedIn())
         {   
             //not logged in and not public url
-            return this.authService.validate_token().then(
+            return this.authService.validateToken().then(
                 success=>{
                     if(success)
                     {
