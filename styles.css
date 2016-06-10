@@ -98,6 +98,36 @@ button.round:hover, button.circle:hover{
   background: #909090;
 }
 
+button.normal, .button.normal{
+  background: #5e738f;
+  background-image: -webkit-linear-gradient(top, #5e738f, #555e66);
+  background-image: -moz-linear-gradient(top, #5e738f, #555e66);
+  background-image: -ms-linear-gradient(top, #5e738f, #555e66);
+  background-image: -o-linear-gradient(top, #5e738f, #555e66);
+  background-image: linear-gradient(to bottom, #5e738f, #555e66);
+  -webkit-border-radius: 3;
+  -moz-border-radius: 3;
+  border-radius: 3px;
+  text-shadow: 0px -1px 0px #696969;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 5px 8px 5px 8px;
+  text-decoration: none;
+  cursor: pointer;
+  border:hidden;
+}
+
+button.normal:hover, .button.normal:hover{
+  background: #6f87a6;
+  background-image: -webkit-linear-gradient(top, #6f87a6, #5e6973);
+  background-image: -moz-linear-gradient(top, #6f87a6, #5e6973);
+  background-image: -ms-linear-gradient(top, #6f87a6, #5e6973);
+  background-image: -o-linear-gradient(top, #6f87a6, #5e6973);
+  background-image: linear-gradient(to bottom, #6f87a6, #5e6973);
+  text-decoration: none;
+}
+
 .colored_background_panel{
   position: absolute;
   width:100%;

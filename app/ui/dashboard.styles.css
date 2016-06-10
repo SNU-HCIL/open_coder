@@ -1,3 +1,7 @@
+#project_list{
+    margin-left: -20px;
+}
+
 #project_list > div{
     display:block;
     float:left;

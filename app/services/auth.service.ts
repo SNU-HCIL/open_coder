@@ -1,8 +1,11 @@
 //https://medium.com/@blacksonic86/authentication-in-angular-2-958052c64492#.obqxr6aiv
 
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+
+import { UserInfo } from '../core/user-info';
 
 const HOST = "http://localhost:3001";
 const PATH_SIGN_IN = HOST + '/auth/sign_in';
@@ -18,22 +21,39 @@ const PATH_NEW_PROJECT = HOST + "/api/prj/new";
 const PARAM_CLIENT = "client"
 const PARAM_TOKEN = "access-token"
 const PARAM_UID = "uid"
-  
+const PARAM_USERINFO = "userinfo"
 
 @Injectable()
 export class AuthService{
   
   private loggedIn : boolean = false;
   
+  private userInfoSource = new BehaviorSubject<UserInfo>(null);
+  userInfoObservable = this.userInfoSource.asObservable();
+
   private httpOptions = new RequestOptions( { headers: new Headers({"Content-Type": 'application/json'}) })
-  
+
   constructor(private http:Http)
   {
-    this.loggedIn = !!localStorage.getItem('auth_token');
+    this.loggedIn = false //!!localStorage.getItem(PARAM_TOKEN);
+    if(this.loggedIn==true)
+    {
+      this.updateUserInfo(JSON.parse(localStorage.getItem(PARAM_USERINFO)));
+      
+    }
+  }
+
+  private updateUserInfo(json){
+    console.log("UserInfo will be updated - ", json.data)
+    this.userInfoSource.next(new UserInfo(json.data));
   }
 
   public isLoggedIn(): boolean{
     return this.loggedIn;
+  }
+
+  public getUserInfo() : UserInfo{
+    return this.userInfoSource.getValue();
   }
   
   private getAuthInfo(): Object{
@@ -42,8 +62,6 @@ export class AuthService{
     {
       result[param] = localStorage.getItem(param);
     }
-    
-    console.log("AuthInfo : ", result);
     
     return result;
   }
@@ -82,7 +100,9 @@ export class AuthService{
         localStorage.setItem(PARAM_CLIENT, response.headers.get(PARAM_CLIENT))
         localStorage.setItem(PARAM_UID, response.headers.get(PARAM_UID))
         localStorage.setItem(PARAM_TOKEN, response.headers.get(PARAM_TOKEN))
-        
+        localStorage.setItem(PARAM_USERINFO, JSON.stringify(response.json()));
+        this.updateUserInfo(response.json());
+
         this.loggedIn = true;
         
         return true;
@@ -90,12 +110,24 @@ export class AuthService{
   }
   
   signOut() : Promise<boolean>{
-    console.log(this.getAuthInfo());
     return this.http.delete(PATH_SIGN_OUT, this.makeHeaderWithAuthInfo())
       .toPromise()
       .then(response=>{
         console.log(response);
-        return true;
+
+        localStorage.removeItem(PARAM_CLIENT)
+        localStorage.removeItem(PARAM_UID)
+        localStorage.removeItem(PARAM_TOKEN)
+        localStorage.removeItem(PARAM_USERINFO)
+
+        if(response.json().success==true)
+        {
+
+          return true;
+        }
+        else{          
+          return false;
+        }
       });
   }
   
@@ -105,6 +137,8 @@ export class AuthService{
       .toPromise()
       .then(response=>{
         console.log(response);
+        localStorage.setItem(PARAM_USERINFO, JSON.stringify(response.json()));
+        this.updateUserInfo(response.json());
         return true;
       })
       .catch(error=>{
