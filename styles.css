@@ -32,18 +32,14 @@ body {
   * for the full set of master styles used by the documentation samples
   */
 
-#wrapper{
-  padding-left: 50px;
-}
-
-#gnb{
-  position: fixed;
-  top:0px;
-  left:0px;
-  width: 50px;
-  background: red;
-  height: 100%;
-  overflow: hidden;
+#top_bar{
+    height: 32px;
+    background: white;
+    padding: 4px 6px;
+    position: relative;
+    -webkit-box-shadow: 0px 1px 3px rgba(37, 37, 37, 0.35);
+    -moz-box-shadow: 0px 1px 3px rgba(37, 37, 37, 0.35);
+    box-shadow: 0px 1px 3px rgba(37, 37, 37, 0.35);
 }
 
 /*common styles*/

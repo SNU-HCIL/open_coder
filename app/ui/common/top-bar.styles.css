@@ -1,9 +1,4 @@
-#top_bar{
-    height: 32px;
-    background: white;
-    padding: 4px 6px;
-    position: relative;
-}
+
 
 #top_bar .logo img{
   height: 100%;

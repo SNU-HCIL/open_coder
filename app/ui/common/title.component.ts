@@ -17,10 +17,18 @@ import { Component, Input } from '@angular/core';
       color: #fafafa;
       border-bottom-color: rgba(255,255,255,0.2);
     }
+    
+    .title .right_content{
+      float:right;
+    }
   `],
   template: `
     <div class="title" [ngClass]="{white:white}">
         {{title}}
+        <div class="right_content">
+          <ng-content></ng-content>
+        </div>
+        <div style="clear:both"></div>
     </div>
     `,
   properties: ['title', 'white']

@@ -4,34 +4,20 @@
   margin-bottom: 60px;
 }
 
-#layout-wrapper{
-  position:relative;
-}
-
 #wrapper{
-  padding-left: 74px;
+  display:flex;
+  height: calc(100% - 40px);
+  background: #f9f9f9;
 }
-
-#wrapper.expanded{
-  padding-left: 274px;
-}
-
-
 
 #lnb{
+  flex: 0 0 47px;
   /*flex*/
   display:flex;
   flex-direction: column;
   -ms-flex-direction: column;
   /**/
   
-  position: fixed;
-  top:0px;
-  left:0px;
-  width: 60px;
-  padding-right:14px;
-  height: 100%;
-  overflow-y: hidden;
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#342b40+0,6f3831+100 */
   background: #342b40; /* Old browsers */
   background: -moz-linear-gradient(-45deg,  #342b40 0%, #6f3831 100%); /* FF3.6-15 */
@@ -41,7 +27,33 @@
 }
 
 #lnb.expanded{
-  width: 260px;
+  flex: 0 0 260px;
+}
+
+#lnb .collapser{
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 9px;
+    color: #A97777;
+    cursor: pointer;
+}
+
+#lnb .collapser:hover{
+  text-decoration: underline;
+  color: #BF9595;
+}
+
+#lnb #expander{
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+  padding: 12px;
+  cursor: pointer;
+}
+
+#lnb #expander:hover{
+  background: rgba(255,255,255,0.1);
 }
 
 #lnb #logo{
@@ -80,18 +92,12 @@
 #main{
   padding-left: 25px;
   padding-right: 12px;
-  margin-right: 368px;
-  height: 100%;
-  overflow-y:scroll;
-  overflow-x: hidden;
-}
+  flex: 1 1;
+  overflow-y: scroll;
+ }
 
 #sidebar{
-  position: fixed;
-  top: 0px;
-  right: 0px;
-  height: 100%;
-  width: 336px;
+  flex: 0 0 336px;
   overflow-y: scroll;
   border-left: 8px solid #e2dcdb;
   padding-left: 12px;

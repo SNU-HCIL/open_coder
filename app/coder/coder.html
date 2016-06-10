@@ -1,32 +1,40 @@
+<!--http://fiddle.jshell.net/r9VaT/-->
+
 <div *ngIf="doc" id="wrapper" [ngClass]="{expanded: isLnbExpanded}">
     <div id="lnb" [ngClass]="{expanded: isLnbExpanded}">
         <div *ngIf="!isLnbExpanded">
+            <!--
             <div id="logo">
                 <img src="app/assets/logo_white.svg">
             </div>
             <div class="separator dark"></div>
             <button (click)="onSaveButtonClicked()">Save</button>
+            -->
+            <div id="expander" (click)="toggleLnb()">→</div>
         </div>
         
         <div id="expanded_lnb_content_wrapper" *ngIf="isLnbExpanded">
+            <oc-title title="Memos" white="true">
+                <div class="collapser" (click)="toggleLnb()">
+                 COLLAPSE
+                </div>
+            </oc-title>
             <oc-memo-list [doc]="doc"></oc-memo-list>
         </div>
-        
+        <!--
         <div id="lnb_expander" (click)="toggleLnb()">
-        </div>        
+        </div>-->        
     </div>
-    <div id="layout-wrapper">
-        <div id="main">
-            <oc-title title="Quote Coder"></oc-title>
-            <div *ngFor="let label of doc.labels" class="label_group_wrapper">
-            <div class="label_wrapper"><span class="label_color_bullet" [style.background]="visualizationInformationService.getCategoricalColor(doc.labels.indexOf(label))"></span>{{label}}</div>
-            <table class="quote_list" >
-                <tr class="quote_element" *ngFor="let quote of doc.quotesByLabel(label)" [quote]="quote"></tr>
-            </table>
-            </div>
+    <div id="main">
+        <oc-title title="Quote Coder"></oc-title>
+        <div *ngFor="let label of doc.labels" class="label_group_wrapper">
+        <div class="label_wrapper"><span class="label_color_bullet" [style.background]="visualizationInformationService.getCategoricalColor(doc.labels.indexOf(label))"></span>{{label}}</div>
+        <table class="quote_list" >
+            <tr class="quote_element" *ngFor="let quote of doc.quotesByLabel(label)" [quote]="quote"></tr>
+        </table>
         </div>
-        <div id="sidebar">
-                <oc-code-summary [doc] = "doc"></oc-code-summary>
-        </div>
+    </div>
+    <div id="sidebar">
+            <oc-code-summary [doc] = "doc"></oc-code-summary>
     </div>
 </div>
