@@ -3,11 +3,11 @@ import {Quote} from '../core/quote';
 import {Entry} from '../core/entry';
 
 import {QuoteEditingState} from './quote-editing-state';
-import {VisualizationInformationService} from './visualization-information.service';
+import {VisualizationInformationService} from '../services/visualization-information.service';
 
 @Component({
   selector: 'tr.quote_element',
-  styleUrls: ['app/ui/quote-editing.styles.css'],
+  styleUrls: ['app/coder/quote-editing.styles.css'],
   styles: [`
     td.label, td.content, td.codes{
     border-bottom: 1px solid #eaeaea;

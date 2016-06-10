@@ -2,14 +2,14 @@ import { Component, Input } from '@angular/core';
 import { QuoteEditingComponent } from './quote-editing.component';
 import { CodeSummaryComponent} from './code-summary.component';
 import { MemoListComponent } from './memo-list.component';
-import {TitleComponent} from './common/title.component';
-import {VisualizationInformationService} from './visualization-information.service';
+import {TitleComponent} from '../ui/common/title.component';
+import {VisualizationInformationService} from '../services/visualization-information.service';
 import { OcDocument } from '../core/oc-document';
 
 @Component({
   selector: 'oc-coder',
-  styleUrls: ['app/ui/coder.styles.css'],
-  templateUrl: 'app/ui/coder.html',
+  styleUrls: ['app/coder/coder.styles.css'],
+  templateUrl: 'app/coder/coder.html',
   directives: [QuoteEditingComponent, CodeSummaryComponent, MemoListComponent, TitleComponent],
   providers: [VisualizationInformationService]
 })

@@ -1,14 +1,14 @@
 import { Component, Input, Output, OnInit, AfterViewInit, ElementRef, EventEmitter } from '@angular/core';
-import { PluralizePipe } from './common/pluralize.pipe';
-import { AuthService } from '../services/auth.service';
-import { StyleInjector, GRADIENT_BACKGROUND_STYLE } from './common/style_injector';
-import { TopBarComponent } from './common/top-bar.component';
-import { TitleComponent } from './common/title.component';
+import { PluralizePipe } from './ui/common/pluralize.pipe';
+import { AuthService } from './services/auth.service';
+import { StyleInjector, GRADIENT_BACKGROUND_STYLE } from './ui/common/style_injector';
+import { TopBarComponent } from './ui/common/top-bar.component';
+import { TitleComponent } from './ui/common/title.component';
 
 @Component({
   selector: 'oc-dashboard',
-  styleUrls:['app/ui/dashboard.styles.css'],
-  templateUrl: 'app/ui/dashboard.html',
+  styleUrls:['app/dashboard.styles.css'],
+  templateUrl: 'app/dashboard.html',
   directives: [TitleComponent, TopBarComponent],
   pipes:[PluralizePipe]
 })

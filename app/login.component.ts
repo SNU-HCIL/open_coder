@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router-deprecated';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'oc-coder',
-  styleUrls: ['app/ui/login.styles.css'],
-  templateUrl: 'app/ui/login.html',
+  styleUrls: ['app/login.styles.css'],
+  templateUrl: 'app/login.html',
   directives: []
 })
 export class LoginComponent {

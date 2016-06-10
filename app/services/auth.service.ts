@@ -119,6 +119,7 @@ export class AuthService{
         localStorage.removeItem(PARAM_UID)
         localStorage.removeItem(PARAM_TOKEN)
         localStorage.removeItem(PARAM_USERINFO)
+        
 
         if(response.json().success==true)
         {

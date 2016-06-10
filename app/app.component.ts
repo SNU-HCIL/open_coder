@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { RouteConfig, RouterOutlet } from '@angular/router-deprecated';
 import { LoginRouterOutlet } from './login.router-outlet';
 
-import { LoginComponent} from './ui/login.component';
-import { DashboardComponent } from './ui/dashboard.component';
-import { CoderComponent } from './ui/coder.component';
+import { LoginComponent} from './login.component';
+import { DashboardComponent } from './dashboard.component';
+import { CoderComponent } from './coder/coder.component';
 import { OcDocument } from './core/oc-document';
 import { AuthService} from './services/auth.service';
 

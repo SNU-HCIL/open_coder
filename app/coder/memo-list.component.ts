@@ -1,14 +1,14 @@
 import { Component, Input } from '@angular/core';
-import {TitleComponent} from './common/title.component';
+import {TitleComponent} from '../ui/common/title.component';
 import {MemoComponent} from './memo.component';
-import {NullAlternativePipe} from './common/null-alternative.pipe';
+import {NullAlternativePipe} from '../ui/common/null-alternative.pipe';
 import { OcDocument } from '../core/oc-document';
 import { Memo } from '../core/memo';
 
 @Component({
   selector: 'oc-memo-list',
-  styleUrls: ['app/ui/memo-list.css'],
-  templateUrl: 'app/ui/memo-list.html',
+  styleUrls: ['app/coder/memo-list.css'],
+  templateUrl: 'app/coder/memo-list.html',
   directives: [TitleComponent, MemoComponent]
 })
 export class MemoListComponent {

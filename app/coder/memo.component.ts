@@ -1,12 +1,12 @@
 import { Component, Input, Output, OnInit, ElementRef, EventEmitter } from '@angular/core';
-import {ClickToEditComponent} from './common/click-to-edit.component';
-import {VisualizationInformationService} from './visualization-information.service';
+import {ClickToEditComponent} from '../ui/common/click-to-edit.component';
+import {VisualizationInformationService} from '../services/visualization-information.service';
 import { Memo } from '../core/memo';
 
 @Component({
   selector: 'oc-memo',
-  styleUrls:['app/ui/memo.css'],
-  templateUrl: 'app/ui/memo.html',
+  styleUrls:['app/coder/memo.css'],
+  templateUrl: 'app/coder/memo.html',
   directives: [ClickToEditComponent]
 })
 export class MemoComponent implements OnInit {
