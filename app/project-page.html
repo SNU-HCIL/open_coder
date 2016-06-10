@@ -20,9 +20,9 @@
     </table>
 
     <div id="document_list" *ngIf="project">
-        <div *ngFor="let document of project.documents">
-            <div class="card buttonized">
-                <span class="name">{{document.name}}</span>
+        <div *ngFor="let document of project.documents" (click)="openDocument(document.id)">
+            <div class="card buttonized document">
+                <div class="name">{{document.name}}</div>
                 <div class="separator"></div>
                 <div class="statistics_list">
                 </div>

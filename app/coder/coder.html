@@ -1,4 +1,4 @@
-<div id="wrapper" [ngClass]="{expanded: isLnbExpanded}">
+<div *ngIf="doc" id="wrapper" [ngClass]="{expanded: isLnbExpanded}">
     <div id="lnb" [ngClass]="{expanded: isLnbExpanded}">
         <div *ngIf="!isLnbExpanded">
             <div id="logo">

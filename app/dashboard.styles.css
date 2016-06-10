@@ -60,13 +60,6 @@
     margin-left: 2px;
 }
 
-.project_list_element .separator{
-    margin-top: 16px;
-    margin-bottom: 12px;
-    height: 1px;
-    background: #D4D4D4;  
-}
-
 .project_list_element .details{
     padding: 0px 2px 4px 2px;
     font-size: 14px;

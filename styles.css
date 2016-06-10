@@ -160,6 +160,13 @@ button.dialog:hover, .button.dialog:hover{
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#342b40', endColorstr='#6f3831',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
+.separator{
+    margin-top: 16px;
+    margin-bottom: 12px;
+    height: 1px;
+    background: #D4D4D4;  
+}
+
 #main_content_wrapper{
   padding:25px 20px 45px 20px;
 }

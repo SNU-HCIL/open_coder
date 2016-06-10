@@ -17,6 +17,7 @@ const PATH_GET_USER_PROJECTS = HOST + "/api/prjs";
 const PATH_NEW_PROJECT = HOST + "/api/prj/new";
 const PATH_PROJECT_DETAIL = HOST + "/api/prj";
 const PATH_CREATE_DOCUMENT = HOST + "/api/doc/new";
+const PATH_DOCUMENT_DETAIL = HOST + "/api/doc";
 
 const PARAM_CLIENT = "client"
 const PARAM_TOKEN = "access-token"
@@ -202,5 +203,15 @@ export class AuthService{
       })
   }
 
+  getDocument(_id:number): Promise<any>{
+    let options = this.makeDefaultOptions();
+    options.search.set("args", JSON.stringify({"id": _id}));
+    
+    return this.http.get(PATH_DOCUMENT_DETAIL, options)
+      .toPromise()
+      .then(result=>{
+        return result.json().result
+      })
+  }
   
 }

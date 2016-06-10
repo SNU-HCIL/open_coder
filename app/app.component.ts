@@ -22,7 +22,7 @@ import { AuthService} from './services/auth.service';
   {path: '/dashboard', component: DashboardComponent, name:"Dashboard", useAsDefault: true},
   {path: '/project/:id', component: ProjectPageComponent, name:"Project"},
   {path: '/login', component: LoginComponent, name:"Login"},
-  {path: '/coder', component:CoderComponent, name:"Coder"}
+  {path: '/document/:id', component:CoderComponent, name:"Document"}
 ])
 
 export class AppComponent implements OnInit { 

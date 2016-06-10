@@ -1,10 +1,14 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { RouteParams, Router} from '@angular/router-deprecated';
+
 import { QuoteEditingComponent } from './quote-editing.component';
 import { CodeSummaryComponent} from './code-summary.component';
 import { MemoListComponent } from './memo-list.component';
 import {TitleComponent} from '../ui/common/title.component';
 import {VisualizationInformationService} from '../services/visualization-information.service';
 import { OcDocument } from '../core/oc-document';
+import { AuthService } from '../services/auth.service';
+
 
 @Component({
   selector: 'oc-coder',
@@ -13,13 +17,20 @@ import { OcDocument } from '../core/oc-document';
   directives: [QuoteEditingComponent, CodeSummaryComponent, MemoListComponent, TitleComponent],
   providers: [VisualizationInformationService]
 })
-export class CoderComponent {
-    @Input() doc : OcDocument;
+export class CoderComponent implements OnInit {
+    doc : OcDocument;
     
     isLnbExpanded :boolean = false;
     
-    constructor(private visualizationInformationService: VisualizationInformationService){
+    constructor(private params: RouteParams, private authService: AuthService, private visualizationInformationService: VisualizationInformationService){
       
+    }
+    
+    ngOnInit(){
+      let id = +this.params.get('id');
+      this.authService.getDocument(id).then(result=>{
+      this.doc = OcDocument.fromJson(result)
+    })
     }
     
     onSaveButtonClicked(){

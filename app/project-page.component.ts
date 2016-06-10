@@ -27,7 +27,7 @@ export class ProjectPageComponent implements OnInit {
   private project:any;
   private bgColorInjector:StyleInjector = new StyleInjector("body", GRADIENT_BACKGROUND_STYLE);
   
-  constructor(private params: RouteParams, private Router : Router, private authService: AuthService)
+  constructor(private params: RouteParams, private router : Router, private authService: AuthService)
   {
   }
 
@@ -44,6 +44,10 @@ export class ProjectPageComponent implements OnInit {
   toAddMode(){
     this.modal.title = "Add New Document"
     this.modal.show();
+  }
+  
+  openDocument(id: number){
+    this.router.navigate(['Document', {id: id}]);
   }
 
   documentFileLoaded(doc : OcDocument){
