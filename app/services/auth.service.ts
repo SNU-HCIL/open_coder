@@ -16,6 +16,7 @@ const PATH_RETURN = HOST + '/auth/validate_token';
 const PATH_GET_USER_PROJECTS = HOST + "/api/prjs";
 const PATH_NEW_PROJECT = HOST + "/api/prj/new";
 const PATH_PROJECT_DETAIL = HOST + "/api/prj";
+const PATH_CREATE_DOCUMENT = HOST + "/api/doc/new";
 
 const PARAM_CLIENT = "client"
 const PARAM_TOKEN = "access-token"
@@ -188,6 +189,16 @@ export class AuthService{
       .toPromise()
       .then(result=>{
         return result.json().result
+      })
+  }
+
+  createDocument(_project_id:number, _name:string, _description:string, _memos:any, _quotes:any)
+  {
+    let options = this.makeDefaultOptions();
+    return this.http.put(PATH_CREATE_DOCUMENT, JSON.stringify({args:{project_id: _project_id, name: _name, description: _description, memos: _memos, quotes: _quotes}}), options)
+      .toPromise()
+      .then(res=>{
+        return res.json().result;
       })
   }
 

@@ -5,6 +5,7 @@ import { Code } from './code';
 
 export class OcDocument{
   name: string;
+  description: string;
   quotes: Quote[]
   labels: string[]
   codeCounts: Array<{code:string, count:number}>
@@ -102,12 +103,14 @@ export class OcDocument{
   }
   
   toSerializedJson(){
-    return {name: this.name, memos: this.memos.map((m)=>{return m.toJson(this)}), quotes: this.quotes.map((q)=>{return q.toJson()})}
+    return {name: this.name, description: this.description, memos: this.memos.map((m)=>{return m.toJson(this)}), quotes: this.quotes.map((q)=>{return q.toJson()})}
   }
   
   static fromJson(json: any){
     let result = new OcDocument();
     result.name = json.name;
+    result.description = json.description;
+
     if(json.quotes != null)
     {
       result.quotes = json.quotes.map((qj)=>{
