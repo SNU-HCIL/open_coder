@@ -21,8 +21,12 @@ const PATH_DOCUMENT_DETAIL = HOST + "/api/doc";
 
 const PARAM_CLIENT = "client"
 const PARAM_TOKEN = "access-token"
+const PARAM_TOKEN_TYPE = "token-type"
+const PARAM_EXPIRY = "expiry"
 const PARAM_UID = "uid"
 const PARAM_USERINFO = "userinfo"
+
+const PARAMS_TOKEN_FORMAT = [PARAM_CLIENT, PARAM_TOKEN, PARAM_TOKEN_TYPE, PARAM_UID, PARAM_EXPIRY]
 
 @Injectable()
 export class AuthService{
@@ -58,7 +62,7 @@ export class AuthService{
   
   private getAuthInfo(): Object{
     let result = {}
-    for(var param of [PARAM_CLIENT, PARAM_TOKEN, PARAM_UID])
+    for(var param of PARAMS_TOKEN_FORMAT)
     {
       result[param] = localStorage.getItem(param);
     }
@@ -97,9 +101,11 @@ export class AuthService{
       .catch(error=>{ console.log(error); return false;})
       .then(response=>{
         console.log("devise login success")
-        localStorage.setItem(PARAM_CLIENT, response.headers.get(PARAM_CLIENT))
-        localStorage.setItem(PARAM_UID, response.headers.get(PARAM_UID))
-        localStorage.setItem(PARAM_TOKEN, response.headers.get(PARAM_TOKEN))
+        for(let param of PARAMS_TOKEN_FORMAT)
+        {
+          localStorage.setItem(param, response.headers.get(param));
+        }
+        
         localStorage.setItem(PARAM_USERINFO, JSON.stringify(response.json()));
         this.updateUserInfo(response.json());
 
