@@ -15,8 +15,7 @@ const PATH_RETURN = HOST + '/auth/validate_token';
 //API paths
 const PATH_GET_USER_PROJECTS = HOST + "/api/prjs";
 const PATH_NEW_PROJECT = HOST + "/api/prj/new";
-
-
+const PATH_PROJECT_DETAIL = HOST + "/api/prj";
 
 const PARAM_CLIENT = "client"
 const PARAM_TOKEN = "access-token"
@@ -39,7 +38,6 @@ export class AuthService{
     if(this.loggedIn==true)
     {
       this.updateUserInfo(JSON.parse(localStorage.getItem(PARAM_USERINFO)));
-      
     }
   }
 
@@ -119,7 +117,7 @@ export class AuthService{
         localStorage.removeItem(PARAM_UID)
         localStorage.removeItem(PARAM_TOKEN)
         localStorage.removeItem(PARAM_USERINFO)
-        
+
 
         if(response.json().success==true)
         {
@@ -153,7 +151,6 @@ export class AuthService{
     return this.http.get(PATH_GET_USER_PROJECTS, options)
       .toPromise()
       .then(res=>{
-        console.log(res.json().result)
         if(res.json().success==true)
         {
           return res.json().result;
@@ -176,6 +173,21 @@ export class AuthService{
         }else{
           return -1;
         }
+      })
+  }
+
+  removeProject(id:number) : Promise<boolean>{
+    return null;
+  }
+
+  getProject(_id:number): Promise<any>{
+    let options = this.makeDefaultOptions();
+    options.search.set("args", JSON.stringify({"id": _id}));
+    
+    return this.http.get(PATH_PROJECT_DETAIL, options)
+      .toPromise()
+      .then(result=>{
+        return result.json().result
       })
   }
 

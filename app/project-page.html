@@ -1,0 +1,39 @@
+<div id="main_content_wrapper">
+    <oc-title *ngIf="project" [title]="project.name" white=true></oc-title>
+    <table id="metainfo">
+        <tr>
+            <th>
+
+            </th>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <th>
+
+            </th>
+            <td>
+
+            </td>
+        </tr>
+    </table>
+
+    <div id="document_list" *ngIf="project">
+        <div *ngFor="let document of project.documents">
+            <div class="card buttonized">
+                <span class="name">{{document.name}}</span>
+                <div class="separator"></div>
+                <div class="statistics_list">
+                </div>
+            </div>
+        </div>
+
+        <div (click)="toAddMode()">
+            <div class="card buttonized add_document" >
+                <div class="non_add_mode_content">+</div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+</div>

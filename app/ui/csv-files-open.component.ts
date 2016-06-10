@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { CsvDeserializerService } from './core/csv-deserializer.service';
+import { CsvDeserializerService } from '../core/csv-deserializer.service';
 
 @Component({
   selector: 'oc-csv-files-open',

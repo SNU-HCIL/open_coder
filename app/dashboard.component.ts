@@ -1,15 +1,15 @@
 import { Component, Input, Output, OnInit, AfterViewInit, ElementRef, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router-deprecated';
 import { PluralizePipe } from './ui/common/pluralize.pipe';
 import { AuthService } from './services/auth.service';
 import { StyleInjector, GRADIENT_BACKGROUND_STYLE } from './ui/common/style_injector';
-import { TopBarComponent } from './ui/common/top-bar.component';
 import { TitleComponent } from './ui/common/title.component';
 
 @Component({
   selector: 'oc-dashboard',
   styleUrls:['app/dashboard.styles.css'],
   templateUrl: 'app/dashboard.html',
-  directives: [TitleComponent, TopBarComponent],
+  directives: [TitleComponent],
   pipes:[PluralizePipe]
 })
 export class DashboardComponent implements OnInit {
@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
     newProjectName : string;
     newProjectDescription : string;
 
-    constructor(private elementRef : ElementRef, private authService: AuthService)
+    constructor(private elementRef : ElementRef, private authService: AuthService, private router: Router)
     {
     }
 
@@ -58,6 +58,8 @@ export class DashboardComponent implements OnInit {
             })
     }
     
-    
+    openProject(_id){
+        this.router.navigate(['Project', {id: _id}])
+    }
     
 }

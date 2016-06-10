@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import {OcDocument} from './core/oc-document';
+import {OcDocument} from '../core/oc-document';
 
 @Component({
   selector: 'oc-file-open',
