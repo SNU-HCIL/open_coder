@@ -1,43 +1,44 @@
+<oc-top-bar></oc-top-bar>
 <div id="main_content_wrapper">
-<oc-title title="Projects" white=true></oc-title>
-<div>
-    <div id="project_list">
-        <div *ngFor="let project of projects" (click)="openProject()">
-            <div class="project_list_element buttonized"> 
-                <div class="project_name" >{{project.name}}</div>
-                <div *ngIf="project.description" class="project_description">{{project.description}}</div>
-                <div class="separator"></div>
-                <div class="details">
-                    <div *ngIf="project.documents" class="num_documents">{{project.documents.length | pluralize:"Document"}}</div>
-                </div>
-            </div>
-        </div>
-        <div *ngIf="addMode==false" (click)="toAddMode()">
-            <div class="project_list_element buttonized">
-                <div class="add_new_project_button">
-                    <div class="plus">+</div>
-                    <div>
-                        Add new project
+    <oc-title title="Projects" white=true></oc-title>
+    <div>
+        <div id="project_list">
+            <div *ngFor="let project of projects" (click)="openProject()">
+                <div class="project_list_element buttonized"> 
+                    <div class="project_name" >{{project.name}}</div>
+                    <div *ngIf="project.description" class="project_description">{{project.description}}</div>
+                    <div class="separator"></div>
+                    <div class="details">
+                        <div *ngIf="project.documents" class="num_documents">{{project.documents.length | pluralize:"Document"}}</div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div *ngIf="addMode==true">
-            <div class="project_list_element add_form">
-                <h4>New Project</h4>
-                <div class="input_group">
-                    <label for="project_name">Project Name</label><br>
-                    <input type="text" id="project_name" class="input" [(ngModel)]="newProjectName">
+            <div *ngIf="addMode==false" (click)="toAddMode()">
+                <div class="project_list_element buttonized">
+                    <div class="add_new_project_button">
+                        <div class="plus">+</div>
+                        <div>
+                            Add new project
+                        </div>
+                    </div>
                 </div>
-
-                <div class="input_group">
-                    <label for="project_description">Project Description</label><br>
-                    <textarea id="project_description" class="input" [(ngModel)]="newProjectDescription" rows=3></textarea>
-                </div>
-                <button class="button_normal" (click)="createNewProject()">Create</button>
             </div>
+            <div *ngIf="addMode==true">
+                <div class="project_list_element add_form">
+                    <h4>New Project</h4>
+                    <div class="input_group">
+                        <label for="project_name">Project Name</label><br>
+                        <input type="text" id="project_name" class="input" [(ngModel)]="newProjectName">
+                    </div>
+
+                    <div class="input_group">
+                        <label for="project_description">Project Description</label><br>
+                        <textarea id="project_description" class="input" [(ngModel)]="newProjectDescription" rows=3></textarea>
+                    </div>
+                    <button class="button_normal" (click)="createNewProject()">Create</button>
+                </div>
+            </div>
+            <div style="clear:both"></div>
         </div>
-        <div style="clear:both"></div>
     </div>
-</div>
 </div>

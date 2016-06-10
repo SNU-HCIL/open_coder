@@ -2,13 +2,14 @@ import { Component, Input, Output, OnInit, AfterViewInit, ElementRef, EventEmitt
 import { PluralizePipe } from './common/pluralize.pipe';
 import { AuthService } from '../services/auth.service';
 import { StyleInjector, GRADIENT_BACKGROUND_STYLE } from './common/style_injector';
-import {TitleComponent} from './common/title.component';
+import { TopBarComponent } from './common/top-bar.component';
+import { TitleComponent } from './common/title.component';
 
 @Component({
   selector: 'oc-dashboard',
   styleUrls:['app/ui/dashboard.styles.css'],
   templateUrl: 'app/ui/dashboard.html',
-  directives: [TitleComponent],
+  directives: [TitleComponent, TopBarComponent],
   pipes:[PluralizePipe]
 })
 export class DashboardComponent implements OnInit {
