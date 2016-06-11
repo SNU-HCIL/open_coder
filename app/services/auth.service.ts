@@ -95,16 +95,33 @@ export class AuthService{
     return options;
   }
   
+  private handleResponseToken(response)
+  {
+    console.log(response);
+    if(response.headers.get(PARAM_TOKEN) != null)
+    {
+      console.log("token will be refreshed. - ", response.headers.get(PARAM_TOKEN));
+      for(let param of PARAMS_TOKEN_FORMAT)
+      {
+        let value = response.headers.get(param)
+        if(value != null && value != "")
+        {        
+          localStorage.setItem(param, response.headers.get(param));
+        }
+      }
+    }
+    
+    
+  }
+  
   signIn(email:string, password:string) : Promise<boolean>{
     return this.http.post( PATH_SIGN_IN, JSON.stringify({email: email, password: password}), this.httpOptions)      
       .toPromise()
       .catch(error=>{ console.log(error); return false;})
       .then(response=>{
         console.log("devise login success")
-        for(let param of PARAMS_TOKEN_FORMAT)
-        {
-          localStorage.setItem(param, response.headers.get(param));
-        }
+        
+        this.handleResponseToken(response);
         
         localStorage.setItem(PARAM_USERINFO, JSON.stringify(response.json()));
         this.updateUserInfo(response.json());
@@ -144,6 +161,7 @@ export class AuthService{
       .toPromise()
       .then(response=>{
         console.log(response);
+        this.handleResponseToken(response);
         localStorage.setItem(PARAM_USERINFO, JSON.stringify(response.json()));
         this.updateUserInfo(response.json());
         return true;
@@ -159,6 +177,7 @@ export class AuthService{
     return this.http.get(PATH_GET_USER_PROJECTS, options)
       .toPromise()
       .then(res=>{
+        this.handleResponseToken(res);
         if(res.json().success==true)
         {
           return res.json().result;
@@ -174,6 +193,7 @@ export class AuthService{
     return this.http.put(PATH_NEW_PROJECT, "", options)
       .toPromise()
       .then(res=>{
+        this.handleResponseToken(res);
         let json = res.json();
         if(json.success==true)
         {
@@ -194,8 +214,9 @@ export class AuthService{
     
     return this.http.get(PATH_PROJECT_DETAIL, options)
       .toPromise()
-      .then(result=>{
-        return result.json().result
+      .then(res=>{
+        this.handleResponseToken(res);
+        return res.json().result
       })
   }
 
@@ -205,6 +226,7 @@ export class AuthService{
     return this.http.put(PATH_CREATE_DOCUMENT, JSON.stringify({args:{project_id: _project_id, name: _name, description: _description, memos: _memos, quotes: _quotes}}), options)
       .toPromise()
       .then(res=>{
+        this.handleResponseToken(res);
         return res.json().result;
       })
   }
@@ -215,8 +237,9 @@ export class AuthService{
     
     return this.http.get(PATH_DOCUMENT_DETAIL, options)
       .toPromise()
-      .then(result=>{
-        return result.json().result
+      .then(res=>{
+        this.handleResponseToken(res);
+        return res.json().result
       })
   }
   
