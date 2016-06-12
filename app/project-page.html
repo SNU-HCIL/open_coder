@@ -25,7 +25,16 @@
                 <div class="name">{{document.name}}</div>
                 <div class="separator"></div>
                 <div class="statistics_list">
+                    <div class="statistic">
+                        <div class="digit"></div>
+                        <div class="unit"></div>
+                    </div>
+                    <div class="clear"></div>
                 </div>
+                <div class="card_button_container">
+                    <button class="inside_card remove" (click)="onRemoveDocumentClicked($event, document.id)">Remove</button>
+                </div>
+                <div class="clear"></div>
             </div>
         </div>
 
@@ -37,6 +46,10 @@
         <div style="clear:both"></div>
     </div>
 </div>
-<oc-modal-container #modal>
+<oc-modal-container #creationModal>
     <oc-file-open (documentOpened)="documentFileLoaded($event)"></oc-file-open>
+</oc-modal-container>
+
+<oc-modal-container #alertModal>
+    {{alert_message}}
 </oc-modal-container>

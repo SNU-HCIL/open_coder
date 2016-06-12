@@ -22,7 +22,9 @@ import {OcDocument} from './core/oc-document';
 })
 export class ProjectPageComponent implements OnInit {
 
-  @ViewChild('modal') modal: ModalDialogComponent;
+  @ViewChild('creationModal') creationModal: ModalDialogComponent;
+  @ViewChild('alertModal') alertModal: ModalDialogComponent;
+  
 
   private project:any;
   private bgColorInjector:StyleInjector = new StyleInjector("body", GRADIENT_BACKGROUND_STYLE);
@@ -40,10 +42,13 @@ export class ProjectPageComponent implements OnInit {
       this.project = result
     })
   }
+  
+  ngAfterViewInit(){
+  }
 
   toAddMode(){
-    this.modal.title = "Add New Document"
-    this.modal.show();
+    this.creationModal.title = "Add New Document"
+    this.creationModal.show();
   }
   
   openDocument(id: number){
@@ -54,10 +59,22 @@ export class ProjectPageComponent implements OnInit {
     let serializedJson = doc.toSerializedJson()
     this.authService.createDocument(this.project.id, serializedJson.name, serializedJson.description, JSON.stringify(serializedJson.memos), JSON.stringify(serializedJson.quotes))
       .then(res=>{
-        this.modal.close();
+        this.creationModal.close();
         console.log(res);
         this.project.documents.push(res);
       })
+  }
+  
+  onRemoveDocumentClicked(event, id:number)
+  {
+    event.stopPropagation();
+    this.alertModal.show(null, "Do you want to remove the document?", true, true, 
+      ()=>{
+        this.authService.removeDocument(id).then((result)=>{
+          let index = this.project.documents.indexOf(this.project.documents.find((d)=>d.id == result.id))
+          this.project.documents.splice(index, 1);
+        })
+      }, null);
   }
 }
     

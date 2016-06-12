@@ -18,6 +18,8 @@ const PATH_NEW_PROJECT = HOST + "/api/prj/new";
 const PATH_PROJECT_DETAIL = HOST + "/api/prj";
 const PATH_CREATE_DOCUMENT = HOST + "/api/doc/new";
 const PATH_DOCUMENT_DETAIL = HOST + "/api/doc";
+const PATH_REMOVE_DOCUMENT = HOST + "/api/doc/rm";
+
 
 const PARAM_CLIENT = "client"
 const PARAM_TOKEN = "access-token"
@@ -97,10 +99,10 @@ export class AuthService{
   
   private handleResponseToken(response)
   {
-    console.log(response);
+    //console.log(response);
     if(response.headers.get(PARAM_TOKEN) != null)
     {
-      console.log("token will be refreshed. - ", response.headers.get(PARAM_TOKEN));
+      //console.log("token will be refreshed. - ", response.headers.get(PARAM_TOKEN));
       for(let param of PARAMS_TOKEN_FORMAT)
       {
         let value = response.headers.get(param)
@@ -242,5 +244,18 @@ export class AuthService{
         return res.json().result
       })
   }
+  
+  removeDocument(_id:number): Promise<any>{
+    let options = this.makeDefaultOptions();
+    options.search.set("args", JSON.stringify({"id": _id}));
+    
+    return this.http.delete(PATH_REMOVE_DOCUMENT, options)
+      .toPromise()
+      .then(res=>{
+        this.handleResponseToken(res);
+        return res.json().result
+      })
+  }
+  
   
 }

@@ -32,7 +32,6 @@ import { TitleComponent } from './title.component';
         border-radius: 6px;
         display: inline-block;
         background: white;
-        min-width: 40%;
         max-width: 80%;
     }
 
@@ -43,6 +42,13 @@ import { TitleComponent } from './title.component';
     #modal_content #buttons{
         text-align: right;
     }
+    
+    #modal_content .message{
+        font-weight: 600;
+        color: #505050;
+        font-size: 17px;
+        margin-top: 23px;
+    }
   `],
   template: `
     <div id="modal_background" *ngIf="isShown">
@@ -50,11 +56,13 @@ import { TitleComponent } from './title.component';
             <tr><td>
                 <div id="modal_frame">
                     <div id="modal_content">
-                        <oc-title [title]="title"></oc-title>
+                        <oc-title *ngIf="title" [title]="title"></oc-title>
+                        <div *ngIf="message" class="message">{{message}}</div>
                         <ng-content></ng-content>
                         <div id="buttons">
-                        <div class="separator"></div>
-                            <button *ngIf="showCancelButton" class="dialog" (click)="close()">Cancel</button>     
+                            <div class="separator"></div>
+                            <button *ngIf="showOkButton" class="dialog" (click)="onOk()">Ok</button>     
+                            <button *ngIf="showCancelButton" class="dialog" (click)="onCancel()">Cancel</button>     
                         </div>
                     </div>
                 </div>
@@ -67,8 +75,16 @@ import { TitleComponent } from './title.component';
 })
 export class ModalDialogComponent {
     private isShown = false;
+    
+    private showOkButton = false;
     private showCancelButton = true;
+    private okHandler: ()=>void = null;
+    private cancelHandler: ()=>void = null;
+    
+    
     title : string;
+    
+    private message:string;
 
     private root$;
 
@@ -80,11 +96,48 @@ export class ModalDialogComponent {
     ngAfterViewInit(){
         this.root$ = jQuery(this.elementRef.nativeElement);
     }
+    
+    clear(){
+        this.title = null;
+        this.message = null;
+        this.showOkButton = false;
+        this.showCancelButton = true;
+        this.okHandler = null;
+        this.cancelHandler = null;
+    }
 
-    show(){
+    show(title?:string, message?:string, showOkButton?: boolean, showCancelButton?:boolean, okHandler?:()=>void, cancelHandler?:()=>void){
+        if(title != null)
+            this.title = title;
+        
+        if(message != null)
+            this.message = message
+        
+        if(showOkButton != null)
+            this.showOkButton = showOkButton;
+        
+        if(showCancelButton != null)
+            this.showCancelButton = showCancelButton;
+        
+        if(okHandler != null)
+            this.okHandler = okHandler;
+        
+        if(cancelHandler != null)
+            this.cancelHandler = cancelHandler;
+        
         this.isShown = true;
         this.root$.hide();
         this.root$.fadeIn(500);
+    }
+    
+    onOk(){
+        if(this.okHandler) this.okHandler();
+        this.close();
+    }
+    
+    onCancel(){
+        if(this.cancelHandler) this.cancelHandler();
+        this.close();
     }
 
     close(){

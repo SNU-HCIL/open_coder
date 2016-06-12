@@ -145,6 +145,23 @@ button.dialog:hover, .button.dialog:hover{
   text-decoration: none;
 }
 
+button.inside_card{
+    cursor: pointer;
+    text-transform: uppercase;
+    color: #D84444;
+    border: hidden;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+button.inside_card:hover{
+  color:white;
+  background: #D84444;
+  border-radius:2px;
+}
+
+
 .colored_background_panel{
   position: absolute;
   width:100%;
@@ -161,6 +178,10 @@ button.dialog:hover, .button.dialog:hover{
     margin-bottom: 12px;
     height: 1px;
     background: #D4D4D4;  
+}
+
+.clear{
+  clear:both;
 }
 
 #main_content_wrapper{
