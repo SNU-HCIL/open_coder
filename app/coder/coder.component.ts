@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
 import { RouteParams, Router} from '@angular/router-deprecated';
 
 import { QuoteEditingComponent } from './quote-editing.component';
@@ -23,7 +23,6 @@ export class CoderComponent implements OnInit {
     isLnbExpanded :boolean = false;
     
     constructor(private params: RouteParams, private authService: AuthService, private visualizationInformationService: VisualizationInformationService){
-      
     }
     
     ngOnInit(){

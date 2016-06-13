@@ -37,8 +37,8 @@ import {IStyleContainer} from './style-container.interface';
             <div class="multiline" *ngIf="singleLine==false"></div>
 
             <div class="button_container">
-                <button class="button.mini" (click)="onApplyClicked()">Apply</button>
-                <button class="button.mini" (click)="onCancelClicked()">Cancel</button>
+                <button class="mini" (click)="onApplyClicked()">Apply</button>
+                <button class="mini" (click)="onCancelClicked()">Cancel</button>
             </div>
         </div>
     </div>

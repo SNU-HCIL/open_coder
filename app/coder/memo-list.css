@@ -3,6 +3,7 @@
     font-weight: 600;
     color: rgba(255, 188, 139, 0.71);
     cursor: pointer;
+    margin-bottom: 5px;
 }
 
 .add_new_memo:hover{

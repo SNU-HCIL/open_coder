@@ -33,6 +33,10 @@ ul.code_list li.code_block{
   margin: 7px 3px;
 }
 
+ul.code_list li.code_block button.mini{
+  margin-right: -8px;
+}
+
 .code{
   padding: 4px 8px;
   background: #eaeaea;
