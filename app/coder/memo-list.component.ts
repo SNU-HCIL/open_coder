@@ -17,11 +17,13 @@ export class MemoListComponent {
     
     addNewMemo(){
         this.doc.memos.push(new Memo());
+        this.doc.update();
     }
     
     removeMemo(memo: Memo)
     {
         this.doc.memos.splice(this.doc.memos.indexOf(memo), 1)
+        this.doc.update();
     }
     
 }

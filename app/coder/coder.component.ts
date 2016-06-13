@@ -29,7 +29,22 @@ export class CoderComponent implements OnInit {
       let id = +this.params.get('id');
       this.authService.getDocument(id).then(result=>{
       this.doc = OcDocument.fromJson(result)
+      
+      this.doc.subscribe((event)=>{
+        
+        if(event == "update")
+        {
+          this.sendDocumentDetail(id, this.doc);
+        }
+      })
     })
+    }
+    
+    private sendDocumentDetail(id, doc){
+      console.log("send document detail to server")
+      this.authService.updateDocumentDetail(id, this.doc).then((result)=>{
+        console.log(result);
+      })
     }
     
     onSaveButtonClicked(){

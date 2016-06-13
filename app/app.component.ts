@@ -9,6 +9,7 @@ import { ProjectPageComponent } from './project-page.component';
 import { CoderComponent } from './coder/coder.component';
 import { OcDocument } from './core/oc-document';
 import { AuthService} from './services/auth.service';
+import { DocumentSyncService} from './services/document-sync.service';
 
 @Component({
   selector: 'oc-app',
@@ -28,13 +29,15 @@ import { AuthService} from './services/auth.service';
 export class AppComponent implements OnInit { 
     doc : OcDocument;
     
-    constructor(private authService: AuthService)
+    constructor(private authService: AuthService, private documentSyncService : DocumentSyncService)
     {/*
       authService.signIn("yhkim@hcil.snu.ac.kr", "HCIL4ever").then(result=> 
       {
         console.log(result)
         authService.signOut().then(result=> console.log(result))
       })*/
+      
+      this.documentSyncService.authService = this.authService;
     }
     
     onDocumentOpened(document: OcDocument){

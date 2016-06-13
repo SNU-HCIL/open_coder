@@ -7,6 +7,8 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 import { UserInfo } from '../core/user-info';
 
+import { OcDocument } from '../core/oc-document';
+
 const HOST = "http://localhost:3001";
 const PATH_SIGN_IN = HOST + '/auth/sign_in';
 const PATH_SIGN_OUT = HOST + '/auth/sign_out';
@@ -19,6 +21,8 @@ const PATH_PROJECT_DETAIL = HOST + "/api/prj";
 const PATH_CREATE_DOCUMENT = HOST + "/api/doc/new";
 const PATH_DOCUMENT_DETAIL = HOST + "/api/doc";
 const PATH_REMOVE_DOCUMENT = HOST + "/api/doc/rm";
+const PATH_UPDATE_DOCUMENT_DETAIL = HOST + "/api/doc/update";
+
 
 
 const PARAM_CLIENT = "client"
@@ -256,6 +260,19 @@ export class AuthService{
         this.handleResponseToken(res);
         return res.json().result
       })
+  }
+  
+  updateDocumentDetail(_id:number, doc: OcDocument){
+    let json = doc.toSerializedJson();
+    return this.http.post( PATH_UPDATE_DOCUMENT_DETAIL, 
+      JSON.stringify({args:{id:_id, memos: JSON.stringify(json.memos), quotes: JSON.stringify(json.quotes)}}), this.makeHeaderWithAuthInfo())      
+      .toPromise()
+      .catch(error=>{ console.log(error); return false;})
+      .then(response=>{
+        this.handleResponseToken(response);
+        return response.json().result;
+      }
+      );
   }
   
   

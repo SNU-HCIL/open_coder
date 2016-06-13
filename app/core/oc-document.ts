@@ -1,9 +1,10 @@
+import { EventEmitter } from '@angular/core';
 import { Entry } from './entry';
 import { Quote } from './quote';
 import { Memo } from './memo';
 import { Code } from './code';
 
-export class OcDocument{
+export class OcDocument extends EventEmitter<any>{
   name: string;
   description: string;
   quotes: Quote[]
@@ -11,8 +12,11 @@ export class OcDocument{
   codeCounts: Array<{code:string, count:number}>
   
   memos : Memo[]
+  
     
   constructor(){
+    super();
+    
     this.quotes = [];
     this.codeCounts = [];
     this.memos = [];
@@ -72,6 +76,8 @@ export class OcDocument{
       }
       else return 0;
     });
+    
+    this.emit("update")
   }
   
   toCsvString(): string{
