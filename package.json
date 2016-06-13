@@ -26,6 +26,7 @@
     "fuse.js": "*",
     "intl": "*",
     "jquery": "*",
+    "moment": "^2.13.0",
     "node-uuid": "*",
     "pluralize": "^2.0.0",
     "quill": "*",

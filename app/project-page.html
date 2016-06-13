@@ -29,6 +29,16 @@
                     <oc-project-card-statistic *ngIf="document.num_codes" unit="Code" [count]="document.num_codes"></oc-project-card-statistic>
                     <oc-project-card-statistic *ngIf="document.num_memos" unit="Memo" [count]="document.num_memos"></oc-project-card-statistic>
                 </div>
+                <div class="card_timestamps">
+                    <div *ngIf="document.created_at_i == document.updated_at_i">
+                        Created at {{document.created_at_i | fromnow}}
+                    </div>
+                    <div *ngIf="document.created_at_i != document.updated_at_i">
+                        <div>
+                            Updated {{document.updated_at_i | fromnow}}
+                        </div>
+                    </div>
+                </div>
                 <div class="card_button_container">
                     <button class="inside_card remove" (click)="onRemoveDocumentClicked($event, document.id)">Remove</button>
                 </div>

@@ -2,6 +2,7 @@ import { Component, Input, Output, OnInit, AfterViewInit, ElementRef, EventEmitt
 import { Router, RouteParams } from '@angular/router-deprecated';
 
 import { PluralizePipe } from './ui/common/pluralize.pipe';
+import { FromNowPipe } from './ui/common/from-now.pipe';
 import { AuthService } from './services/auth.service';
 import { StyleInjector, GRADIENT_BACKGROUND_STYLE } from './ui/common/style_injector';
 import { TopBarComponent } from './ui/common/top-bar.component';
@@ -62,7 +63,7 @@ class ProjectCardStatisticComponent{
   styleUrls:['app/project-page.styles.css'],
   templateUrl: 'app/project-page.html',
   directives: [ProjectCardStatisticComponent, TitleComponent, TopBarComponent, ModalDialogComponent, FileOpenComponent],
-  pipes:[PluralizePipe]
+  pipes:[PluralizePipe, FromNowPipe]
 })
 export class ProjectPageComponent implements OnInit {
 
