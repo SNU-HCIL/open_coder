@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import {Quote} from '../core/quote';
 import {Entry} from '../core/entry';
+
+import {ResizableTableColumn} from '../ui/common/resizable-table-column';
 
 import {QuoteEditingState} from './quote-editing-state';
 import {VisualizationInformationService} from '../services/visualization-information.service';
@@ -17,6 +19,7 @@ import {VisualizationInformationService} from '../services/visualization-informa
   template: 
     `
       <td class="content" [style.border-left-color]="visualizationInformationService.getCategoricalColor(quote.parent.labels.indexOf(quote.label))">{{quote.content}}</td>
+      <td class="handle"><div></div></td>
       <td class="codes">
         <ul class="code_list">
             <li *ngFor="let code of quote.codes" class="code_block">
@@ -49,7 +52,7 @@ import {VisualizationInformationService} from '../services/visualization-informa
     `,
   directives: []
 })
-export class QuoteEditingComponent implements OnInit {
+export class QuoteEditingComponent implements OnInit, AfterViewInit {
     @Input() quote: Quote
     
     state: string = "idle"
@@ -58,13 +61,19 @@ export class QuoteEditingComponent implements OnInit {
     
     @Input() private newCodeName : string
     
-    constructor(private visualizationInformationService: VisualizationInformationService)
+    private resizableTableColumn : ResizableTableColumn;
+    
+    constructor(private elmRef : ElementRef, private visualizationInformationService: VisualizationInformationService)
     {
         
     }
     
     ngOnInit():any{
         
+    }
+    
+    ngAfterViewInit(){
+        this.resizableTableColumn = new ResizableTableColumn(this.elmRef.nativeElement, "td.handle", "td.content");
     }
     
     onAddCodeButtonClicked(): void

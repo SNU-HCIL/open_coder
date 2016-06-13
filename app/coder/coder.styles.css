@@ -1,7 +1,8 @@
 .quote_list{
   font-family: 'KoPub Batang', serif;
-  width: 100%;
   margin-bottom: 60px;
+  table-layout: fixed;
+  min-width:100%;
 }
 
 #wrapper{
