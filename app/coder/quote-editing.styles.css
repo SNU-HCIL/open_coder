@@ -26,6 +26,10 @@ td.handle{
 td.handle:hover{
   background: rgba(200,200,200,0.5);
 }
+
+td.handle.dragging{
+  background: #D2E4F3;
+}
   
 td.codes{
   font-family: sans-serif;

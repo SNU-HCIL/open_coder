@@ -10,7 +10,7 @@ export class ResizableTableColumn{
   private changingCells$ : JQuery;
   
   
-  constructor(private rowElement, handleCellSelector, private changingTargetCellSelector)
+  constructor(private rowElement, private handleCellSelector, private changingTargetCellSelector)
   {
     this.body$ = jQuery(rowElement);
     this.handle$ = this.body$.find(handleCellSelector)
@@ -36,6 +36,9 @@ export class ResizableTableColumn{
     this.dragStartDeltaX = this.handle$.offset().left - this.dragStartX;
     this.dragStartCellWidth = this.changingTarget$.width();
     this.changingCells$ = this.body$.closest("table").find(this.changingTargetCellSelector);
+    
+    this.body$.closest("table").find(this.handleCellSelector).addClass("dragging");
+    
     console.log(this.dragStartDeltaX);
   }
   
@@ -52,6 +55,8 @@ export class ResizableTableColumn{
     console.log("finish drag")
     jQuery(window).off("mouseup");
     jQuery(window).off("mousemove");
+    
+    this.body$.closest("table").find(this.handleCellSelector).removeClass("dragging");
   }
   
 }
