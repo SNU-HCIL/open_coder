@@ -218,6 +218,7 @@ export class AuthService{
       .toPromise()
       .then(res=>{
         this.handleResponseToken(res);
+        console.log(res.json())
         return res.json().result
       })
   }

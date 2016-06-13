@@ -13,11 +13,55 @@ import { ModalDialogComponent } from './ui/common/modal-dialog.component';
 
 import {OcDocument} from './core/oc-document';
 
+
+
+@Component({
+  selector: 'oc-project-card-statistic',
+  styles: [`
+
+    .statistic{
+      float:left;
+      padding-right: 40px;
+    }
+
+
+    .statistic .unit{
+      font-size: 14px;
+      font-weight: 300;
+      color: #7f8996;
+    }
+
+    .statistic .count{
+      font-size: 24px;
+      font-weight: 600;
+      color: #468de5;
+    }
+  `],
+  template:`
+    <div class="statistic">
+      <div class="count">
+        {{count}}
+      </div>
+      <div class="unit">
+        {{count | pluralize:unit:false}}
+      </div>
+    </div>
+    `,
+  pipes: [PluralizePipe],
+  properties: ['unit', 'count']
+})
+class ProjectCardStatisticComponent{
+  private unit;
+  private count;
+}
+
+
+
 @Component({
   selector: 'oc-project-page',
   styleUrls:['app/project-page.styles.css'],
   templateUrl: 'app/project-page.html',
-  directives: [TitleComponent, TopBarComponent, ModalDialogComponent, FileOpenComponent],
+  directives: [ProjectCardStatisticComponent, TitleComponent, TopBarComponent, ModalDialogComponent, FileOpenComponent],
   pipes:[PluralizePipe]
 })
 export class ProjectPageComponent implements OnInit {
