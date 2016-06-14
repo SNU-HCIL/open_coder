@@ -43,17 +43,21 @@ import {OcDocument} from './core/oc-document';
       <div class="count">
         {{count}}
       </div>
-      <div class="unit">
+      <div class="unit" *ngIf="pluralizeUnit==true">
         {{count | pluralize:unit:false}}
+      </div>
+      <div class="unit" *ngIf="pluralizeUnit==false">
+        {{unit}}
       </div>
     </div>
     `,
   pipes: [PluralizePipe],
-  properties: ['unit', 'count']
+  properties: ['unit', 'count', 'pluralizeUnit']
 })
 class ProjectCardStatisticComponent{
   private unit;
   private count;
+  private pluralizeUnit: boolean = true;
 }
 
 

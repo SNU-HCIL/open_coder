@@ -1,0 +1,15 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "moment/moment.d.ts": {
+      "commit": "ab67936d9b153b0f6c0ca958f0c98923e0d88625"
+    },
+    "moment/moment-node.d.ts": {
+      "commit": "ab67936d9b153b0f6c0ca958f0c98923e0d88625"
+    }
+  }
+}

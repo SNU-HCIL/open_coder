@@ -27,7 +27,7 @@ export class DocumentSyncService{
     else if(this.changedAt != ){
       
     }*/
-  }
+  
   /*
   getDocument() : Promise<OcDocument>{
     var needUpdate = false;
