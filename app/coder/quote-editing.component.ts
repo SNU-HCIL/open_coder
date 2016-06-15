@@ -30,7 +30,7 @@ import {VisualizationInformationService} from '../services/visualization-informa
             </li> 
             <li>
                 <div *ngIf="state == 'adding'" class="code adding_panel">
-                   <input class="code_name_input" type="text" [(ngModel)]="newCodeName" (keyup)="newCodeNameKeyUpEvent($event)">
+                   <input class="code_name_input" type="text" (input)="newCodeName = $event.target.value" (keyup)="newCodeNameKeyUpEvent($event)">
                    <div *ngIf="autoCompleteList" class="autocomplete_list">
                     <ul>
                         <li *ngFor="let candidate of autoCompleteList" (click)="onCandidateClicked(candidate)">
@@ -59,9 +59,11 @@ export class QuoteEditingComponent implements OnInit, AfterViewInit {
     error: string
     autoCompleteList : Array<string>
     
-    @Input() private newCodeName : string
+    private newCodeName : string
     
     private resizableTableColumn : ResizableTableColumn;
+    
+    private input$ : JQuery;
     
     constructor(private elmRef : ElementRef, private visualizationInformationService: VisualizationInformationService)
     {
@@ -74,6 +76,9 @@ export class QuoteEditingComponent implements OnInit, AfterViewInit {
     
     ngAfterViewInit(){
         this.resizableTableColumn = new ResizableTableColumn(this.elmRef.nativeElement, "td.handle", "td.content");
+        this.input$ = jQuery(this.elmRef.nativeElement).find(".code_name_input") 
+        this.input$.val(null);
+        
     }
     
     onAddCodeButtonClicked(): void
@@ -89,6 +94,7 @@ export class QuoteEditingComponent implements OnInit, AfterViewInit {
     newCodeNameKeyUpEvent(event : any) : void
     {
         let fuse = new Fuse(this.quote.parent.codeCounts.map((cc)=>{return cc.code}), null);
+        console.log(this.newCodeName)
         let fuzzyIndices = fuse.search(this.newCodeName);
         if(fuzzyIndices != null && fuzzyIndices.length > 0)
         {
