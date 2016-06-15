@@ -193,3 +193,24 @@ button.inside_card:hover{
 #main_content_wrapper{
   padding:25px 20px 45px 20px;
 }
+
+.qtip .qtip-content{
+    border: 2px solid #AD7085;
+    -webkit-box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 3px 9px 0px rgba(0,0,0,0.5);
+    background-color: white;
+    color: #252525;
+    line-height: 22px;
+    padding: 8px 12px;
+    font-weight: 600;
+}
+
+.qtip h3{
+  margin-top:0px;
+}
+
+.qtip-default{
+  border:hidden;
+  background: transparent;
+}

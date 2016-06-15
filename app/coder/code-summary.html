@@ -5,12 +5,6 @@
     </li>
 </ul>-->
 <table class="summary_table">
-    <tr *ngFor="let codeCount of doc.codeCounts" (mouseover)="onHover(codeCount.code)">
-        <th>
-            {{codeCount.code}}
-        </th>
-        <td>
-            {{codeCount.count}}
-        </td>
+    <tr class="code_summary_row" *ngFor="let codeCount of doc.codeCounts" (mouseover)="onHover(codeCount.code)" [codeCount] = "codeCount" [doc]="doc">
     </tr>
 </table>
