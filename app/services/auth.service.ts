@@ -9,7 +9,7 @@ import { UserInfo } from '../core/user-info';
 
 import { OcDocument } from '../core/oc-document';
 
-const HOST = "http://147.46.242.147:3001";
+const HOST = "http://147.46.242.147:3002";
 const PATH_SIGN_IN = HOST + '/auth/sign_in';
 const PATH_SIGN_OUT = HOST + '/auth/sign_out';
 const PATH_RETURN = HOST + '/auth/validate_token';
