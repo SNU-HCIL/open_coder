@@ -37,6 +37,8 @@ export class Memo extends Entry{
     fromJson(json, doc?:OcDocument){
         super.fromJson(json)
         
+        this.title = json.title;
+        
         if(json.contexts != null)
         {
             this.contexts = json.contexts.map(function(cj): Entry{

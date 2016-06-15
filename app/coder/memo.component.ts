@@ -12,6 +12,7 @@ import { Memo } from '../core/memo';
 export class MemoComponent implements OnInit {
     @Input() memo : Memo;
     @Output() onRemove = new EventEmitter();
+    @Output() onEdited = new EventEmitter();
     
     constructor(private elmRef: ElementRef, private visualizationInformationService: VisualizationInformationService){
       
@@ -24,5 +25,15 @@ export class MemoComponent implements OnInit {
     
     onRemoveButtonClicked(){
       this.onRemove.next(this.memo);
+    }
+    
+    titleEdited(value)
+    {
+      this.onEdited.next(this.memo);
+    }
+    
+    contentEdited(value)
+    {
+      this.onEdited.next(this.memo);
     }
 }

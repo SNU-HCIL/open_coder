@@ -1,12 +1,12 @@
 <div class="memo">
     <button class="mini close" (click)="onRemoveButtonClicked()">✖</button>
     <div class="header">
-        <oc-click-to-edit class="title" [target]="memo" propertyName="title" altText="No Title">
+        <oc-click-to-edit class="title" [target]="memo" propertyName="title" altText="No Title" (editApplied)="titleEdited($value)">
         </oc-click-to-edit>
         <div class="timestamp">
             {{memo.timestamp | date: "yyyy MM dd, hh:mm:ss"}}
         </div>
     </div>
-     <oc-click-to-edit class="content" [target]="memo" propertyName="content" altText="Click to Edit" [singleLine]=false componentMarginStyle="9px 0px 0px 0px">
+     <oc-click-to-edit class="content" [target]="memo" propertyName="content" altText="Click to Edit" [singleLine]=false componentMarginStyle="9px 0px 0px 0px" (editApplied)="contentEdited($value)">
     </oc-click-to-edit>
 </div>

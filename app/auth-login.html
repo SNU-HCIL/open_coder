@@ -1,0 +1,26 @@
+<div class="colored_background_panel">
+<div id="login_panel" class="center">
+    <img src="/app/assets/logotype_white.svg">
+    <form id="login_form" role="form" (submit)="onSubmit($event)">
+        <input type="text" #email class="form_input" [(ngModel)] = "information.email" id="username" placeholder="E-mail">
+        <input type="password" #password class="form_input" [(ngModel)] = "information.password" id="password" placeholder="Password">
+        <div *ngIf="mode=='signup'">
+            <input type="password" #password_confirmation class="form_input" [(ngModel)] = "information.password_confirmation" id="password_confirmation" placeholder="Confirm Password">
+            <hr>
+            <input type="text" #name class="form_input" [(ngModel)] = "information.name" id="name" placeholder="Name">
+            <input type="text" #nickname class="form_input" [(ngModel)] = "information.nickname" id="nickname" placeholder="Nickname">
+        </div>
+        <div class="links">
+            <a class="button_signup" (click)="toggleMode()" [ngSwitch]="mode">
+                <template ngSwitchWhen="login">Sign Up</template>
+                <template ngSwitchWhen="signup">I Already Have an Account</template>
+            </a>
+            
+            <button type="submit" class="button_submit" [ngSwitch]="mode">
+                <template ngSwitchWhen="login">Login</template>
+                <template ngSwitchWhen="signup">Submit</template>
+            </button>
+        </div>
+    </form>
+</div>
+</div>

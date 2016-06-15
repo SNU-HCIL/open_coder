@@ -39,8 +39,35 @@
     border: hidden;
     background: rgba(255,255,255,0.3);
     border-radius: 4px;
+    
 }
 
 #login_form button.button_submit:hover{
     background: rgba(255,255,255,0.4);
+}
+
+#login_form .links{
+    clear:both;   
+    text-align: right;
+}
+
+#login_form .button_signup{
+    float: left;
+    margin-top: 11px;
+    font-weight: 600;
+    color: #efefef;
+    font-size: 14px;
+}
+
+#login_form .button_signup:link, #login_form .button_signup:visited{
+    color: #efefef;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+#login_form .button_signup:hover, #login_form .button_signup:active{
+    color: #efefef;
+    text-decoration: underline;
+    cursor: pointer;
 }

@@ -26,4 +26,8 @@ export class MemoListComponent {
         this.doc.update();
     }
     
+    memoEdited(){
+        this.doc.update();
+    }
+    
 }

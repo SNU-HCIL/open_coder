@@ -10,6 +10,7 @@ import { UserInfo } from '../core/user-info';
 import { OcDocument } from '../core/oc-document';
 
 const HOST = "http://147.46.242.147:3002";
+const PATH_SIGN_UP = HOST + '/auth';
 const PATH_SIGN_IN = HOST + '/auth/sign_in';
 const PATH_SIGN_OUT = HOST + '/auth/sign_out';
 const PATH_RETURN = HOST + '/auth/validate_token';
@@ -159,6 +160,28 @@ export class AuthService{
           return false;
         }
       });
+  }
+  
+  signUp(email, password, password_confirmation, name, nickname) : Promise<boolean>{
+    return this.http.post( PATH_SIGN_UP, 
+        JSON.stringify({
+          email: email, 
+          password: password, 
+          password_confirmation: password_confirmation, 
+          name: name, 
+          nickname: nickname,
+          confirm_success_url: "http://localhost:3000/confirmed"
+        }), this.httpOptions
+      )      
+      .toPromise()
+      .catch(error=>{ console.log(error); return false;})
+      .then(response=>{
+        console.log("devise signup success")
+        
+        this.handleResponseToken(response);
+        console.log(response.json());
+        return true;
+        })
   }
   
   validateToken() : Promise<boolean>{

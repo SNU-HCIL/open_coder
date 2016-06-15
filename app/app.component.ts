@@ -3,10 +3,11 @@ import { RouteConfig, RouterOutlet } from '@angular/router-deprecated';
 import { LoginRouterOutlet } from './login.router-outlet';
 
 import { TopBarComponent } from './ui/common/top-bar.component';
-import { LoginComponent} from './login.component';
+import { LoginComponent } from './auth.components';
 import { DashboardComponent } from './dashboard.component';
 import { ProjectPageComponent } from './project-page.component';
 import { CoderComponent } from './coder/coder.component';
+
 import { OcDocument } from './core/oc-document';
 import { AuthService} from './services/auth.service';
 import { DocumentSyncService} from './services/document-sync.service';
