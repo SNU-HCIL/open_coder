@@ -28,7 +28,7 @@
     <div id="main">
         <oc-title title="Quote Coder"></oc-title>
         <div *ngFor="let label of doc.labels" class="label_group_wrapper">
-        <div class="label_wrapper"><span class="label_color_bullet" [style.background]="visualizationInformationService.getCategoricalColor(doc.labels.indexOf(label))"></span>{{label}}</div>
+        <div class="label_wrapper"><span class="label_color_bullet" [style.background]="visualizationInformationService.getCategoricalColor(doc.labels.indexOf(label))"></span>{{label | nullAlternative:"Unlabeled"}}</div>
         <table class="quote_list" >
             <tr class="quote_element" *ngFor="let quote of doc.quotesByLabel(label)" [quote]="quote"></tr>
         </table>

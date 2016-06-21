@@ -4,8 +4,9 @@ import { RouteParams, Router} from '@angular/router-deprecated';
 import { QuoteEditingComponent } from './quote-editing.component';
 import { CodeSummaryComponent} from './code-summary.component';
 import { MemoListComponent } from './memo-list.component';
-import {TitleComponent} from '../ui/common/title.component';
-import {VisualizationInformationService} from '../services/visualization-information.service';
+import { TitleComponent } from '../ui/common/title.component';
+import { NullAlternativePipe } from '../ui/common/null-alternative.pipe';
+import { VisualizationInformationService } from '../services/visualization-information.service';
 import { OcDocument } from '../core/oc-document';
 import { AuthService } from '../services/auth.service';
 
@@ -15,12 +16,13 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['app/coder/coder.styles.css'],
   templateUrl: 'app/coder/coder.html',
   directives: [QuoteEditingComponent, CodeSummaryComponent, MemoListComponent, TitleComponent],
+  pipes: [NullAlternativePipe],
   providers: [VisualizationInformationService]
 })
 export class CoderComponent implements OnInit {
     doc : OcDocument;
     
-    isLnbExpanded :boolean = false;
+    isLnbExpanded :boolean = true;
     
     constructor(private params: RouteParams, private authService: AuthService, private visualizationInformationService: VisualizationInformationService){
     }
@@ -29,6 +31,8 @@ export class CoderComponent implements OnInit {
       let id = +this.params.get('id');
       this.authService.getDocument(id).then(result=>{
       this.doc = OcDocument.fromJson(result)
+      
+      console.log(this.doc);
       
       this.doc.subscribe((event)=>{
         
