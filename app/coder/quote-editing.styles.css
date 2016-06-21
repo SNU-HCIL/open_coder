@@ -21,6 +21,13 @@ td.handle{
   width:12px;
   position:relative;
   cursor: ew-resize;
+  /*background: rgba(200,200,200, 0.12);*/
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+1,0f140f+99&0+1,0+34,0+34,0.2+35,0+47,0+53,0.2+65,0+66 */
+  background: -moz-linear-gradient(left,  rgba(0,0,0,0) 1%, rgba(5,7,5,0) 34%, rgba(5,7,5,0.2) 35%, rgba(7,9,7,0) 47%, rgba(8,10,8,0) 53%, rgba(10,13,10,0.2) 65%, rgba(10,13,10,0) 66%, rgba(15,20,15,0) 99%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left,  rgba(0,0,0,0) 1%,rgba(5,7,5,0) 34%,rgba(5,7,5,0.2) 35%,rgba(7,9,7,0) 47%,rgba(8,10,8,0) 53%,rgba(10,13,10,0.2) 65%,rgba(10,13,10,0) 66%,rgba(15,20,15,0) 99%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right,  rgba(0,0,0,0) 1%,rgba(5,7,5,0) 34%,rgba(5,7,5,0.2) 35%,rgba(7,9,7,0) 47%,rgba(8,10,8,0) 53%,rgba(10,13,10,0.2) 65%,rgba(10,13,10,0) 66%,rgba(15,20,15,0) 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000f140f',GradientType=1 ); /* IE6-9 */
+
 }
 
 td.handle:hover{
