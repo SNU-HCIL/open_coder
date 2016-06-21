@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, AfterViewInit, ElementRef } from '@angular/core';
 import {OcDocument} from '../core/oc-document';
 
 @Component({
@@ -18,11 +18,21 @@ import {OcDocument} from '../core/oc-document';
     </div>
   `
 })
-export class FileOpenComponent {
+export class FileOpenComponent implements AfterViewInit {
   file: File;
   error: string;
+  dropzone : Dropzone;
   
   @Output() documentOpened = new EventEmitter();
+  
+  constructor(private elmRef: ElementRef)
+  {
+    
+  }
+  
+  ngAfterViewInit(){
+    this.dropzone = new Dropzone(jQuery(this.elmRef.nativeElement).find("input[name=file]").get(0));
+  }
   
   fileChangeEvent(fileInput: any){
     if(fileInput.target.files.length>0)

@@ -126,13 +126,12 @@ export class ModalDialogComponent {
     }
     
     
-    
     onOk(){
-        if(this.okHandler) this.okHandler();
         if(this.okValidationFunc)
         {
             if(this.okValidationFunc()==true)
             {
+                if(this.okHandler) this.okHandler();
                 this.close();
             }
             else{
@@ -141,7 +140,10 @@ export class ModalDialogComponent {
             }
         }
         else
+        {
+            if(this.okHandler) this.okHandler();
             this.close();
+        }
     }
     
     onCancel(){

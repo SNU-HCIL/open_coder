@@ -56,7 +56,19 @@
     </div>
 </div>
 <oc-modal-container #creationModal>
-    <oc-file-open (documentOpened)="documentFileLoaded($event)"></oc-file-open>
+    <div class="input_group">
+        <label for="document_name">Document Name*</label><br>
+        <input type="text" id="document_name" class="input" [(ngModel)]="newDocumentName">
+    </div>
+
+    <div class="input_group">
+        <label for="document_description">Document Description</label><br>
+        <textarea id="document_description" class="input" [(ngModel)]="newDocumentDescription" rows=3></textarea>
+    </div>
+    <div class="input_group">
+        <label>Quote Data(CSV)</label><br>
+        <oc-csv-files-open #csvOpen></oc-csv-files-open>
+    </div>
 </oc-modal-container>
 
 <oc-modal-container #alertModal>

@@ -8,7 +8,7 @@ import { StyleInjector, GRADIENT_BACKGROUND_STYLE } from './ui/common/style_inje
 import { TopBarComponent } from './ui/common/top-bar.component';
 import { TitleComponent } from './ui/common/title.component';
 
-import { FileOpenComponent } from './ui/file-open.component';
+import { CsvFilesOpenComponent } from './ui/csv-files-open.component';
 
 import { ModalDialogComponent } from './ui/common/modal-dialog.component';
 
@@ -64,17 +64,20 @@ class ProjectCardStatisticComponent{
 
 @Component({
   selector: 'oc-project-page',
-  styleUrls:['app/project-page.styles.css'],
+  styleUrls:['app/project-page.styles.css', 'app/ui/small-form-styles.css'],
   templateUrl: 'app/project-page.html',
-  directives: [ProjectCardStatisticComponent, TitleComponent, TopBarComponent, ModalDialogComponent, FileOpenComponent],
+  directives: [ProjectCardStatisticComponent, TitleComponent, TopBarComponent, ModalDialogComponent, CsvFilesOpenComponent],
   pipes:[PluralizePipe, FromNowPipe]
 })
 export class ProjectPageComponent implements OnInit {
 
   @ViewChild('creationModal') creationModal: ModalDialogComponent;
   @ViewChild('alertModal') alertModal: ModalDialogComponent;
+  @ViewChild('csvOpen') csvOpen: CsvFilesOpenComponent;
   
-
+  private newDocumentName:string;
+  private newDocumentDescription:string;
+  
   private project:any;
   private bgColorInjector:StyleInjector = new StyleInjector("body", GRADIENT_BACKGROUND_STYLE);
   
@@ -97,14 +100,54 @@ export class ProjectPageComponent implements OnInit {
 
   toAddMode(){
     this.creationModal.title = "Add New Document"
-    this.creationModal.show();
+    this.creationModal.show({showOkButton:true, okHandler: 
+      ()=>{
+        if(this.csvOpen.hasFiles()==false)
+        {
+          console.log("no file provided. make empty document");
+          let doc = new OcDocument();
+          doc.name = this.newDocumentName;
+          doc.description = this.newDocumentDescription;
+          this.addNewDocument(doc);
+        }
+        else{
+          console.log("csv sources provided. load data and make document");
+          this.csvOpen.open(
+            (document)=>{
+              document.name = this.newDocumentName;
+              document.description = this.newDocumentDescription;
+              this.addNewDocument(document);
+            }
+          );
+        }
+      }, okValidationFunc: ()=>{
+        if(this.csvOpen.hasFiles()==true)
+        {
+          if(this.csvOpen.isAllFileValidated()==false)
+          {
+            return false;
+          }
+        }
+        
+        if(this.newDocumentName==null || this.newDocumentName === "")
+        {
+          return false;
+        }
+        
+        return true;
+      }});
   }
   
   openDocument(id: number){
     this.router.navigate(['Document', {id: id}]);
   }
+  
+  onUploaderFileChanged(files:any){
+    if(this.csvOpen.isAllFileValidated()==true){
+    }
+  }
 
-  documentFileLoaded(doc : OcDocument){
+  addNewDocument(doc : OcDocument){
     let serializedJson = doc.toSerializedJson()
     this.authService.createDocument(this.project.id, serializedJson.name, serializedJson.description, JSON.stringify(serializedJson.memos), JSON.stringify(serializedJson.quotes))
       .then(res=>{
