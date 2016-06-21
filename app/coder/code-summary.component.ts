@@ -43,21 +43,33 @@ export class CodeSummaryRowComponent implements AfterViewInit {
     
     ngAfterViewInit(){
       this.self$ = jQuery(this.elmRef.nativeElement)
-      this.self$.qtip({
+      let ha = this.self$.qtip({
+        overwrite: true,
         show: {
           solo: true
         },
-        content: {text: ()=>{return this.buildTooltipContent();}},
+        hide:{
+          fixed:true,
+          delay: 1000
+        },
+        content: {text: (event, api)=>{return this.buildTooltipContent(event, api);}},
         position: {
+          viewport: jQuery(window),
           my: 'center right',
           at: 'center left',
-          viewport: jQuery(window)
+          adjust:{
+            resize: true,
+            scroll: true,
+            method: 'shift'
+          }
         }
       })
     }
     
-    buildTooltipContent(){
-      let table = jQuery("<table></table>").attr("class", "tooltip_content_table").css("border-spacing", "8px");
+    buildTooltipContent(event, api:QTip2.Api){
+      let table = jQuery("<table></table>")
+        .attr("class", "tooltip_content_table")
+        .css("border-spacing", "8px");
       table.append(`<h3>${pluralize("Quote", this.codeCount.count)} with Code</h3>`)
       for(let quote of this.doc.quotesByCode(this.codeCount.code))
       {
@@ -74,8 +86,16 @@ export class CodeSummaryRowComponent implements AfterViewInit {
           
         table.append(row)
       }
-      
-      return table.prop('outerHTML')
+
+      let wrapper = jQuery("<div></div>")
+        .attr("class", "table_wrapper")
+        .css("overflow-y", "auto")
+        .css("max-height", jQuery(window).innerHeight()*0.95+"px");
+        
+      let result = wrapper.append(table).prop('outerHTML')
+      api.set("content.text", result);
+      api.reposition();
+      return result;
       
     }
 }

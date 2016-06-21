@@ -204,6 +204,7 @@ button.inside_card:hover{
     line-height: 22px;
     padding: 8px 12px;
     font-weight: 600;
+    position:relative;
 }
 
 .qtip h3{

@@ -1,7 +1,13 @@
 {
+  "name": "open-coder",
   "globalDependencies": {
     "core-js": "registry:dt/core-js#0.0.0+20160317120654",
     "jasmine": "registry:dt/jasmine#2.2.0+20160505161446",
-    "node": "registry:dt/node#4.0.0+20160509154515"
+    "node": "registry:dt/node#4.0.0+20160509154515",
+    "moment": "github:DefinitelyTyped/DefinitelyTyped/moment/moment.d.ts#ab67936d9b153b0f6c0ca958f0c98923e0d88625",
+    "moment-node": "github:DefinitelyTyped/DefinitelyTyped/moment/moment-node.d.ts#ab67936d9b153b0f6c0ca958f0c98923e0d88625",
+    "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#830e4aaac859e4f648efaa16712f1d6e378e6902",
+    "qtip2": "github:DefinitelyTyped/DefinitelyTyped/qtip2/qtip2.d.ts#1315d46f8066eec8c197914da88e98629ebc2254",
+    "dropzone": "github:DefinitelyTyped/DefinitelyTyped/dropzone/dropzone.d.ts#830e4aaac859e4f648efaa16712f1d6e378e6902"
   }
 }
