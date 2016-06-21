@@ -35,7 +35,8 @@ build/Release
 node_modules
 
 #typings
-/typings/
+/typings/*
+!/typings/tsd.d.ts
 
 # Optional npm cache directory
 .npm
