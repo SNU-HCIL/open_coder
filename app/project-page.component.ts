@@ -117,13 +117,13 @@ export class ProjectPageComponent implements OnInit {
   onRemoveDocumentClicked(event, id:number)
   {
     event.stopPropagation();
-    this.alertModal.show(null, "Do you want to remove the document?", true, true, 
-      ()=>{
+    this.alertModal.show({message:"Do you want to remove the document?", showOkButton: true, showCancelButton: true, 
+      okHandler: ()=>{
         this.authService.removeDocument(id).then((result)=>{
           let index = this.project.documents.indexOf(this.project.documents.find((d)=>d.id == result.id))
           this.project.documents.splice(index, 1);
         })
-      }, null);
+      }});
   }
 }
     

@@ -81,6 +81,8 @@ export class ModalDialogComponent {
     private okHandler: ()=>void = null;
     private cancelHandler: ()=>void = null;
     
+    private okValidationFunc: ()=>boolean = null;
+    private okValidationFailedMessage: string = "Validation failed.";
     
     title : string;
     
@@ -104,35 +106,42 @@ export class ModalDialogComponent {
         this.showCancelButton = true;
         this.okHandler = null;
         this.cancelHandler = null;
+        this.okValidationFunc = null;
+        this.okValidationFailedMessage = "Validation Failed.";
     }
 
-    show(title?:string, message?:string, showOkButton?: boolean, showCancelButton?:boolean, okHandler?:()=>void, cancelHandler?:()=>void){
-        if(title != null)
-            this.title = title;
-        
-        if(message != null)
-            this.message = message
-        
-        if(showOkButton != null)
-            this.showOkButton = showOkButton;
-        
-        if(showCancelButton != null)
-            this.showCancelButton = showCancelButton;
-        
-        if(okHandler != null)
-            this.okHandler = okHandler;
-        
-        if(cancelHandler != null)
-            this.cancelHandler = cancelHandler;
+    show(args?:{title?:string, message?:string, showOkButton?: boolean, showCancelButton?:boolean, okHandler?:()=>void, cancelHandler?:()=>void, okValidationFunc?:()=>boolean, okValidationFailedMessage?: string}){
+        if(args)
+        {
+            for(let arg in args)
+            {
+                if(args[arg]!=null)
+                    this[arg] = args[arg]
+            }
+        }
         
         this.isShown = true;
         this.root$.hide();
         this.root$.fadeIn(500);
     }
     
+    
+    
     onOk(){
         if(this.okHandler) this.okHandler();
-        this.close();
+        if(this.okValidationFunc)
+        {
+            if(this.okValidationFunc()==true)
+            {
+                this.close();
+            }
+            else{
+                //TODO okValidation MEssage
+                console.log(this.okValidationFailedMessage);
+            }
+        }
+        else
+            this.close();
     }
     
     onCancel(){
