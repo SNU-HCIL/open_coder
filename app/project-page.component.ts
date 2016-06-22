@@ -71,6 +71,8 @@ class ProjectCardStatisticComponent{
 })
 export class ProjectPageComponent implements OnInit {
 
+  private isLoading = true;
+
   @ViewChild('creationModal') creationModal: ModalDialogComponent;
   @ViewChild('alertModal') alertModal: ModalDialogComponent;
   @ViewChild('csvOpen') csvOpen: CsvFilesOpenComponent;
@@ -92,6 +94,7 @@ export class ProjectPageComponent implements OnInit {
     let id = +this.params.get('id');
     this.authService.getProject(id).then(result=>{
       this.project = result
+      this.isLoading = false;
     })
   }
   

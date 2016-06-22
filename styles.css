@@ -215,3 +215,28 @@ button.inside_card:hover{
   border:hidden;
   background: transparent;
 }
+
+
+/*Spinner*/
+
+.sk-three-bounce {
+  position: absolute;
+  margin: auto;
+  width: 80px;
+  height:80px;
+  top:80px;
+  left:0;
+  right:0;
+  bottom:0;
+  text-align: center; 
+}
+
+.sk-three-bounce .sk-child {
+    width: 15px;
+    height: 15px;
+    background: #6f3831;   
+  }
+
+.sk-three-bounce.bright .sk-child {
+    background-color: rgba(255,255,255,0.8);
+}

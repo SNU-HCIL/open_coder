@@ -20,6 +20,9 @@ import { AuthService } from '../services/auth.service';
   providers: [VisualizationInformationService]
 })
 export class CoderComponent implements OnInit {
+
+    private isLoading = true;
+
     doc : OcDocument;
     
     isLnbExpanded :boolean = true;
@@ -41,6 +44,9 @@ export class CoderComponent implements OnInit {
           this.sendDocumentDetail(id, this.doc);
         }
       })
+
+      this.isLoading = false;
+
     })
     }
     
