@@ -14,6 +14,8 @@ import { TitleComponent } from './ui/common/title.component';
 })
 export class DashboardComponent implements OnInit {
     
+    private isLoading = true;    
+
     private projects : Array<any>;
 
     private addMode : boolean = false;
@@ -30,6 +32,7 @@ export class DashboardComponent implements OnInit {
     ngOnInit(){
         this.authService.getProjects().then(res=>{
             this.projects = res;
+            this.isLoading = false;
         })
         
         this.bgColorInjector.apply();

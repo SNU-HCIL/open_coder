@@ -1,5 +1,11 @@
 <!--http://fiddle.jshell.net/r9VaT/-->
 
+<div class="sk-three-bounce" *ngIf="isLoading">
+    <div class="sk-child sk-bounce1"></div>
+    <div class="sk-child sk-bounce2"></div>
+    <div class="sk-child sk-bounce3"></div>
+</div>
+
 <div *ngIf="doc" id="wrapper" [ngClass]="{expanded: isLnbExpanded}">
     <div id="lnb" [ngClass]="{expanded: isLnbExpanded}">
         <div *ngIf="!isLnbExpanded">

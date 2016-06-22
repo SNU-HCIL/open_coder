@@ -7,6 +7,8 @@
     
     <!-- qtip -->
     <link rel="stylesheet" href="node_modules/qtip2/dist/jquery.qtip.min.css"></link>
+    <link rel="stylesheet" href="node_modules/spinkit/css/spinkit.css"></link>
+    
     
     <link rel="stylesheet" href="styles.css">
     <!-- 1. Load libraries -->
@@ -39,6 +41,12 @@
   </head>
   <!-- 3. Display the application -->
   <body>
-    <oc-app>Loading...</oc-app>
+    <oc-app>
+      <div class="sk-three-bounce dark">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+      </div>
+    </oc-app>
   </body>
 </html>
