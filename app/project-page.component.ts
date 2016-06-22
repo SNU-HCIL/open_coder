@@ -1,10 +1,10 @@
-import { Component, Input, Output, OnInit, AfterViewInit, ElementRef, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Input, Output, OnInit, AfterViewInit, OnDestroy, ElementRef, EventEmitter, ViewChild } from '@angular/core';
 import { Router, RouteParams } from '@angular/router-deprecated';
 
 import { PluralizePipe } from './ui/common/pluralize.pipe';
 import { FromNowPipe } from './ui/common/from-now.pipe';
 import { AuthService } from './services/auth.service';
-import { StyleInjector, GRADIENT_BACKGROUND_STYLE } from './ui/common/style_injector';
+import { StyleInjector, GRADIENT_BACKGROUND_CLASS } from './ui/common/style_injector';
 import { TopBarComponent } from './ui/common/top-bar.component';
 import { TitleComponent } from './ui/common/title.component';
 
@@ -69,7 +69,7 @@ class ProjectCardStatisticComponent{
   directives: [ProjectCardStatisticComponent, TitleComponent, TopBarComponent, ModalDialogComponent, CsvFilesOpenComponent],
   pipes:[PluralizePipe, FromNowPipe]
 })
-export class ProjectPageComponent implements OnInit {
+export class ProjectPageComponent implements OnInit, OnDestroy {
 
   private isLoading = true;
 
@@ -81,7 +81,7 @@ export class ProjectPageComponent implements OnInit {
   private newDocumentDescription:string;
   
   private project:any;
-  private bgColorInjector:StyleInjector = new StyleInjector("body", GRADIENT_BACKGROUND_STYLE);
+  private bgColorInjector:StyleInjector = new StyleInjector("body", [GRADIENT_BACKGROUND_CLASS]);
   
   constructor(private params: RouteParams, private router : Router, private authService: AuthService)
   {
@@ -96,6 +96,10 @@ export class ProjectPageComponent implements OnInit {
       this.project = result
       this.isLoading = false;
     })
+  }
+
+  ngOnDestroy(){
+    this.bgColorInjector.restore();
   }
   
   ngAfterViewInit(){

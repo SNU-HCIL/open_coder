@@ -1,8 +1,8 @@
-import { Component, Input, Output, OnInit, AfterViewInit, ElementRef, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, OnDestroy, AfterViewInit, ElementRef, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router-deprecated';
 import { PluralizePipe } from './ui/common/pluralize.pipe';
 import { AuthService } from './services/auth.service';
-import { StyleInjector, GRADIENT_BACKGROUND_STYLE } from './ui/common/style_injector';
+import { StyleInjector, GRADIENT_BACKGROUND_CLASS } from './ui/common/style_injector';
 import { TitleComponent } from './ui/common/title.component';
 
 @Component({
@@ -12,7 +12,7 @@ import { TitleComponent } from './ui/common/title.component';
   directives: [TitleComponent],
   pipes:[PluralizePipe]
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
     
     private isLoading = true;    
 
@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
 
     private addMode : boolean = false;
     
-    private bgColorInjector:StyleInjector = new StyleInjector("body", GRADIENT_BACKGROUND_STYLE);
+    private bgColorInjector:StyleInjector = new StyleInjector("body", [GRADIENT_BACKGROUND_CLASS]);
 
     newProjectName : string;
     newProjectDescription : string;
@@ -36,6 +36,10 @@ export class DashboardComponent implements OnInit {
         })
         
         this.bgColorInjector.apply();
+    }
+
+    ngOnDestroy(){
+        this.bgColorInjector.restore();
     }
 
     toAddMode(){
