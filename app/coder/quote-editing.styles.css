@@ -69,6 +69,10 @@ ul.code_list li.code_block button.mini{
   border-radius: 4px;
 }
 
+button.add_code{
+  margin-bottom: 8px;
+}
+
 .adding_panel{
   position:relative;
   float:left;
