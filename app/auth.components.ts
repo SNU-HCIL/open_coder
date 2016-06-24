@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Router, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { AuthService } from './services/auth.service';
+import { StyleInjector, GRADIENT_BACKGROUND_CLASS } from './ui/common/style_injector';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 @Component({
@@ -9,17 +10,28 @@ import { AuthService } from './services/auth.service';
   templateUrl: 'app/auth-login.html',
   directives: [ROUTER_DIRECTIVES]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
   private remember: boolean;
   
   private mode = "login"
   
+  private bgColorInjector:StyleInjector = new StyleInjector("body", [GRADIENT_BACKGROUND_CLASS]);
+ 
+
   private information : {name:string, nickname:string, email:string, password:string, password_confirmation:string} =
     {name:null, nickname:null, email:null, password:null, password_confirmation:null}
   
   constructor(private authService : AuthService, private router: Router)
   {
     
+  }
+
+  ngOnInit(){
+    this.bgColorInjector.apply();
+  }
+
+  ngOnDestroy(){
+    this.bgColorInjector.restore();
   }
   
   onSubmit(event)

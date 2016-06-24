@@ -44,6 +44,7 @@ export class TopBarComponent {
       this.authService.signOut().then(res=>{
         if(res==true)
         {
+          this.userInfo = null;
           this.router.navigate(["Login"]);
         }
       })
