@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div *ngIf="addMode==false" (click)="toAddMode()">
-                <div class="project_list_element buttonized">
+                <div class="card buttonized">
                     <div class="add_new_project_button">
                         <div class="plus">+</div>
                         <div>
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div *ngIf="addMode==true">
-                <div class="project_list_element add_form">
+                <div class="card add_form">
                     <h4>New Project</h4>
                     <div class="input_group">
                         <label for="project_name">Project Name</label><br>
