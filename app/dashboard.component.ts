@@ -8,7 +8,7 @@ import { ModalDialogComponent } from './ui/common/modal-dialog.component';
 
 @Component({
   selector: 'oc-dashboard',
-  styleUrls:['app/dashboard.styles.css'],
+  styleUrls:['app/page-common.styles.css', 'app/dashboard.styles.css'],
   templateUrl: 'app/dashboard.html',
   directives: [TitleComponent, ModalDialogComponent],
   pipes:[PluralizePipe]

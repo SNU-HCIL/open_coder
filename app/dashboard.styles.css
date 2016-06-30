@@ -2,35 +2,13 @@
     margin-left: -20px;
 }
 
-#project_list > div{
-    display:block;
-    float:left;
-    overflow:hidden;
-}
-
-.project_list_element{
+.card{
     width: 300px;
     height: 200px;
     padding: 12px;
-    background: #fefefe;
-    -webkit-box-shadow: 0px 9px 31px 3px rgba(0,0,0,0.16);
-    -moz-box-shadow: 0px 9px 31px 3px rgba(0,0,0,0.16);
-    box-shadow: 0px 9px 31px 3px rgba(0,0,0,0.16);
-
-    margin:12px 19px 30px 19px;
-    position: relative;
 }
 
-.project_list_element.buttonized{
-    cursor:pointer;
-}
-
-.project_list_element.buttonized:hover{
-    border: 2px solid #AD7085;
-    padding:10px;
-}
-
-.project_list_element h4{
+.card h4{
     font-size: 16px;
     margin: -12px -12px 0px -12px;
     font-weight: 600;
@@ -43,13 +21,13 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#342b40', endColorstr='#6f3831',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
-.project_list_element .project_name{
+.card .project_name{
     font-size: 25px;
     font-weight: 200;
     color: #252525;
 }
 
-.project_list_element .project_description{
+.card .project_description{
     font-size: 13px;
     color: #575757;
     font-weight: 600;
@@ -57,14 +35,14 @@
     margin-left: 2px;
 }
 
-.project_list_element .details{
+.card .details{
     padding: 0px 2px 4px 2px;
     font-size: 14px;
     font-weight: 600;
     color: #848484;
 }
 
-.project_list_element .card_button_container{
+.card .card_button_container{
     position: absolute;
     bottom: 10px;
     right: 8px;

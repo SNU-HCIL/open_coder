@@ -62,7 +62,7 @@ class ProjectCardStatisticComponent{
 
 @Component({
   selector: 'oc-project-page',
-  styleUrls:['app/project-page.styles.css', 'app/ui/small-form-styles.css'],
+  styleUrls:['app/page-common.styles.css', 'app/project-page.styles.css', 'app/ui/small-form-styles.css'],
   templateUrl: 'app/project-page.html',
   directives: [ProjectCardStatisticComponent, TitleComponent, TopBarComponent, ModalDialogComponent, CsvFilesOpenComponent],
   pipes:[PluralizePipe, FromNowPipe]

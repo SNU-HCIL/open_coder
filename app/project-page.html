@@ -6,7 +6,7 @@
 <div id="main_content_wrapper">
     <oc-title *ngIf="project" [title]="project.name" white=true></oc-title>
 
-    <div id="document_list" *ngIf="project">
+    <div id="document_list" class="card_list" *ngIf="project">
         <div *ngFor="let document of project.documents" (click)="openDocument(document.id)">
             <div class="card buttonized document">
                 <div class="name">{{document.name}}</div>

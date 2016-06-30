@@ -7,9 +7,9 @@
 <div id="main_content_wrapper">
     <oc-title title="Projects" white=true></oc-title>
     <div>
-        <div id="project_list">
+        <div id="project_list" class="card_list">
             <div *ngFor="let project of projects" (click)="openProject(project.id)">
-                <div class="project_list_element buttonized"> 
+                <div class="card buttonized"> 
                     <div class="project_name" >{{project.name}}</div>
                     <div *ngIf="project.description" class="project_description">{{project.description}}</div>
                     <div class="separator"></div>
