@@ -18,6 +18,7 @@
     box-shadow: 0px 9px 31px 3px rgba(0,0,0,0.16);
 
     margin:12px 19px 30px 19px;
+    position: relative;
 }
 
 .project_list_element.buttonized{
@@ -27,10 +28,6 @@
 .project_list_element.buttonized:hover{
     border: 2px solid #AD7085;
     padding:10px;
-}
-
-.project_list_element.buttonized > * {
-    pointer-events: none;
 }
 
 .project_list_element h4{
@@ -65,6 +62,12 @@
     font-size: 14px;
     font-weight: 600;
     color: #848484;
+}
+
+.project_list_element .card_button_container{
+    position: absolute;
+    bottom: 10px;
+    right: 8px;
 }
 
 .add_new_project_button{

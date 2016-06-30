@@ -16,6 +16,9 @@
                     <div class="details">
                         <div *ngIf="project.documents" class="num_documents">{{project.documents.length | pluralize:"Document"}}</div>
                     </div>
+                    <div class="card_button_container">
+                        <button class="inside_card remove" (click)="onRemoveProjectClicked($event, project.id)">Remove</button>
+                    </div>
                 </div>
             </div>
             <div *ngIf="addMode==false" (click)="toAddMode()">
@@ -47,3 +50,7 @@
         </div>
     </div>
 </div>
+
+<oc-modal-container #alertModal>
+    {{alert_message}}
+</oc-modal-container>

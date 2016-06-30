@@ -10,22 +10,24 @@ import { UserInfo } from '../core/user-info';
 import { OcDocument } from '../core/oc-document';
 
 const HOST = "http://147.46.242.147:3002";
+
+// Authentication
 const PATH_SIGN_UP = HOST + '/auth';
 const PATH_SIGN_IN = HOST + '/auth/sign_in';
 const PATH_SIGN_OUT = HOST + '/auth/sign_out';
 const PATH_RETURN = HOST + '/auth/validate_token';
 
-//API paths
+// API paths
 const PATH_GET_USER_PROJECTS = HOST + "/api/prjs";
 const PATH_NEW_PROJECT = HOST + "/api/prj/new";
+const PATH_REMOVE_PROJECT = HOST + "/api/prj/rm";
 const PATH_PROJECT_DETAIL = HOST + "/api/prj";
 const PATH_CREATE_DOCUMENT = HOST + "/api/doc/new";
 const PATH_DOCUMENT_DETAIL = HOST + "/api/doc";
 const PATH_REMOVE_DOCUMENT = HOST + "/api/doc/rm";
 const PATH_UPDATE_DOCUMENT_DETAIL = HOST + "/api/doc/update";
 
-
-
+// Parameters
 const PARAM_CLIENT = "client"
 const PARAM_TOKEN = "access-token"
 const PARAM_TOKEN_TYPE = "token-type"
@@ -117,8 +119,6 @@ export class AuthService{
         }
       }
     }
-    
-    
   }
   
   signIn(email:string, password:string) : Promise<boolean>{
@@ -233,8 +233,16 @@ export class AuthService{
       })
   }
 
-  removeProject(id:number) : Promise<boolean>{
-    return null;
+  removeProject(_id:number) : Promise<any>{
+    let options = this.makeDefaultOptions();
+    options.search.set("args", JSON.stringify({"id": _id}));
+    
+    return this.http.delete(PATH_REMOVE_PROJECT, options)
+      .toPromise()
+      .then(res=>{
+        this.handleResponseToken(res);
+        return res.json().result
+      })
   }
 
   getProject(_id:number): Promise<any>{

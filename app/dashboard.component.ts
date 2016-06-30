@@ -1,20 +1,22 @@
-import { Component, Input, Output, OnInit, OnDestroy, AfterViewInit, ElementRef, EventEmitter } from '@angular/core';
+import { Component, Input, Output, OnInit, OnDestroy, AfterViewInit, ElementRef, EventEmitter, ViewChild } from '@angular/core';
 import { Router } from '@angular/router-deprecated';
 import { PluralizePipe } from './ui/common/pluralize.pipe';
 import { AuthService } from './services/auth.service';
 import { StyleInjector, GRADIENT_BACKGROUND_CLASS } from './ui/common/style_injector';
 import { TitleComponent } from './ui/common/title.component';
+import { ModalDialogComponent } from './ui/common/modal-dialog.component';
 
 @Component({
   selector: 'oc-dashboard',
   styleUrls:['app/dashboard.styles.css'],
   templateUrl: 'app/dashboard.html',
-  directives: [TitleComponent],
+  directives: [TitleComponent, ModalDialogComponent],
   pipes:[PluralizePipe]
 })
-export class DashboardComponent implements OnInit, OnDestroy {
-    
+export class DashboardComponent implements OnInit, OnDestroy {    
     private isLoading = true;    
+
+    @ViewChild('alertModal') alertModal: ModalDialogComponent;
 
     private projects : Array<any>;
 
@@ -67,6 +69,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     
     openProject(_id){
         this.router.navigate(['Project', {id: _id}])
+    }    
+
+    onRemoveProjectClicked(event, id:number)
+    {
+        event.stopPropagation();
+        this.alertModal.show({message:"Do you want to remove this project?", showOkButton: true, showCancelButton: true, 
+        okHandler: ()=>{
+            this.authService.removeProject(id).then((result)=>{
+                let index = this.projects.indexOf(this.projects.find((d)=>d.id == result.id));
+                this.projects.splice(index, 1);
+            })
+        }});
     }
-    
 }

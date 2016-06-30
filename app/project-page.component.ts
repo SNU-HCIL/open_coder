@@ -60,8 +60,6 @@ class ProjectCardStatisticComponent{
   private pluralizeUnit: boolean = true;
 }
 
-
-
 @Component({
   selector: 'oc-project-page',
   styleUrls:['app/project-page.styles.css', 'app/ui/small-form-styles.css'],
@@ -70,7 +68,6 @@ class ProjectCardStatisticComponent{
   pipes:[PluralizePipe, FromNowPipe]
 })
 export class ProjectPageComponent implements OnInit, OnDestroy {
-
   private isLoading = true;
 
   @ViewChild('creationModal') creationModal: ModalDialogComponent;
@@ -176,4 +173,3 @@ export class ProjectPageComponent implements OnInit, OnDestroy {
       }});
   }
 }
-    
